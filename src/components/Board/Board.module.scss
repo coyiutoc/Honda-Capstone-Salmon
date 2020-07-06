@@ -1,0 +1,15 @@
+@import "styles/partials/_colors.scss";
+
+.board {
+  background-color: $grey-light;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.boardBody {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}

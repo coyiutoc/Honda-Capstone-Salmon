@@ -1,0 +1,14 @@
+@import "./partials/_typography.scss";
+
+body, html {
+  font-family: Telegraf;
+  margin: 0;
+  button {
+    outline: none;
+  }
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}

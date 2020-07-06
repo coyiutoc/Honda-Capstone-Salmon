@@ -1,0 +1,32 @@
+@import "styles/partials/_colors.scss";
+@import "styles/partials/_padding.scss";
+
+.topNavigation {
+  height: 4rem;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  padding-left: $page-horizontal-padding;
+  padding-right: $page-horizontal-padding;
+}
+
+.backButton {
+  grid-column: 1;
+  justify-content: flex-start;
+}
+
+.boardTitle {
+  grid-column: 2;
+  font-size: 1.2rem;
+  justify-content: center;
+}
+
+.users {
+  grid-column: 3;
+  justify-content: flex-end;
+}
+
+.backButton, .boardTitle, .users {
+  display: flex;
+  align-items: center;
+}
