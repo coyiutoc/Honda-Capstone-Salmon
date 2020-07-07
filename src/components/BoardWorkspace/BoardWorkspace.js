@@ -1,36 +1,12 @@
 import React, { useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import uuid from "uuid/v4";
+import { DragDropContext } from "react-beautiful-dnd";
+import { sourceColumn, columnsFromBackend } from 'data/dummyData.js';
+import SearchList from 'components/BoardWorkspace/SearchList/SearchList.js';
+import Column from 'components/BoardWorkspace/Column/Column.js';
 import styles from 'components/BoardWorkspace/BoardWorkspace.module.scss';
 
-const itemsFromBackend = [
-  { id: uuid(), content: "First task" },
-  { id: uuid(), content: "Second task" },
-  { id: uuid(), content: "Third task" },
-  { id: uuid(), content: "Fourth task" },
-  { id: uuid(), content: "Fifth task" }
-];
-
-const columnsFromBackend = {
-  [uuid()]: {
-    name: "Requested",
-    items: itemsFromBackend
-  },
-  [uuid()]: {
-    name: "To do",
-    items: []
-  },
-  [uuid()]: {
-    name: "In Progress",
-    items: []
-  },
-  [uuid()]: {
-    name: "Done",
-    items: []
-  }
-};
-
-const onDragEnd = (result, columns, setColumns) => {
+// Updates states of all columns after a drag + place has occurred
+const updateColumnState = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -67,83 +43,37 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
+// TODO: reset order of the source column depending on search query
+const updateSourceList = () => {
+  return null;
+}
+
 const BoardWorkspace = (props) =>  {
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
+  const srcKey = Object.entries(sourceColumn)[0][0];
+  const srcColState = columns[srcKey];
+
   return (
-    <div className={styles.boardWorkspace}>
-      <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
-      >
-        {Object.entries(columns).map(([columnId, column], index) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center"
-              }}
-              key={columnId}
-            >
-              <h2>{column.name}</h2>
-              <div style={{ margin: 8 }}>
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                            ? "lightblue"
-                            : "lightgrey",
-                          padding: 4,
-                          width: 250,
-                          minHeight: 500
-                        }}
-                      >
-                        {column.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      minHeight: "50px",
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#263B4A"
-                                        : "#456C86",
-                                      color: "white",
-                                      ...provided.draggableProps.style
-                                    }}
-                                  >
-                                    {item.content}
-                                  </div>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    );
-                  }}
-                </Droppable>
-              </div>
-            </div>
-          );
-        })}
-      </DragDropContext>
-    </div>
+    <DragDropContext onDragEnd={result => updateColumnState(result, columns, setColumns)}>
+      <div className={styles.boardWorkspace}>
+
+        {/* SEARCH COLUMN */}
+        <SearchList columnId = {srcKey} column = {srcColState} updateSourceList = {updateSourceList}/>
+
+        {/* DESTINATION BUCKETS */}
+        <div className={styles.boardColumns}>
+          {Object.entries(columns).map(([columnId, column], index) => {
+            if (columnId !== srcKey) {
+              return ( <Column columnId={columnId}
+                              column = {column}
+                              key={columnId}
+                              />
+              );
+            }
+          })}
+        </div>
+      </div>
+    </DragDropContext>
   );
 }
 

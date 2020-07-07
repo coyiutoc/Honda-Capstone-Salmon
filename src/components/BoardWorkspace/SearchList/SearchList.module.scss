@@ -1,0 +1,27 @@
+@import "styles/partials/_colors.scss";
+@import "styles/partials/_padding.scss";
+
+.searchList {
+  width: 20rem;
+  background-color: white;
+  border-right: 1px solid $grey-dark;
+  border-top: 1px solid $grey-dark;
+  padding: $page-vertical-padding $page-horizontal-padding;
+  overflow-y: auto;
+}
+
+.searchList__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.searchBar {
+  padding-top: $page-vertical-padding;
+  padding-bottom: $page-vertical-padding;
+  display: flex;
+  width: 100%;
+
+  > input {
+    flex: 2
+  }
+}
