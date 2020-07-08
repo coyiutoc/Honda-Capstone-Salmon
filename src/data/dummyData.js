@@ -28,11 +28,11 @@ const items = [
   new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null),
   new Evidence("Salmon4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
   new Evidence("Salmon5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
-  new Evidence("Salmon1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
-  new Evidence("Salmon2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
-  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null),
-  new Evidence("Salmon4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
-  new Evidence("Salmon5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
+  new Evidence("Trout1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
+  new Evidence("Trout2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
+  new Evidence("Trout3", [tags.TEMPURA], members.CAITLIN, null),
+  new Evidence("Trout4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
+  new Evidence("Trout5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
 ];
 
 // Source list / bucket
@@ -45,3 +45,5 @@ export const columnsFromBackend = {
   [uuid()]: new Column("Destination 3"),
   [uuid()]: new Column("Destination 4"),
 };
+
+items[0].hasTag(tags.YAKITORI);

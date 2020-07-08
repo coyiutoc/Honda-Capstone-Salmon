@@ -6,10 +6,14 @@ export function Evidence(quote, tags, createdBy, source){
   this.tags = tags;
   this.createdBy = createdBy;
   this.source = source;
+  this.hasTag = function(tag){
+    return this.tags.includes(tag);
+  }
 }
 
 export function Column(name, items) {
   this.name = name;
+
   if (items === undefined) {
     this.items = [];
   } else {
