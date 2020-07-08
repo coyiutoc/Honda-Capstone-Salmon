@@ -39,20 +39,24 @@ const updateColumnState = (result, columns, setColumns) => {
           sourceItems[source.index].mapped++;
         }
       } else {
-        const srclistid = Object.entries(columns).find(
-          (col) => col[1].name === "Source List"
-        )[0];
-        const srclist = columns[srclistid].items;
-        const srcevid = srclist.findIndex(
-          (item) => item.quoteid === removed.quoteid
-        );
-        columns[srclistid].items[srcevid].mapped--;
+        if (sourceColumn.name !== "Source List") {
+          const srclistid = Object.entries(columns).find(
+            (col) => col[1].name === "Source List"
+          )[0];
+          const srclist = columns[srclistid].items;
+          const srcevid = srclist.findIndex(
+            (item) => item.quoteid === removed.quoteid
+          );
+          columns[srclistid].items[srcevid].mapped--;
+          console.log("the other one");
+        }
       }
     } else {
       let sourceEvidence = destItems.find(
         (item) => item.quoteid === removed.quoteid
       );
       sourceEvidence.mapped--;
+      console.log("this one");
     }
     setColumns({
       ...columns,
