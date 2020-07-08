@@ -8,7 +8,7 @@ export const members = {
   MICHAEL: new Member("Michael", "Silvestre"),
   HALEY: new Member("Haley", "Park"),
   CAITLIN: new Member("Caitlin", "Coyiuto"),
-}
+};
 
 // Tags
 export const tags = {
@@ -16,27 +16,77 @@ export const tags = {
   SUSHI: new Tag("Sushi", "#9C36B5"),
   TEMPURA: new Tag("Tempura", "#FA5252"),
   RAMEN: new Tag("Ramen", "#748FFC"),
-  SOBA: new Tag("Soba", "#845EF7")
-}
+  SOBA: new Tag("Soba", "#845EF7"),
+};
 
-export const users = []
+export const users = [];
 
 // Evidence
 const items = [
-  new Evidence("Salmon1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
-  new Evidence("Salmon2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
-  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null),
-  new Evidence("Salmon4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
-  new Evidence("Salmon5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
-  new Evidence("Salmon1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
-  new Evidence("Salmon2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
-  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null),
-  new Evidence("Salmon4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
-  new Evidence("Salmon5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
+  new Evidence(
+    "Salmon1",
+    [tags.YAKITORI, tags.SOBA],
+    members.MATT,
+    null,
+    false
+  ),
+  new Evidence(
+    "Salmon2",
+    [tags.YAKITORI, tags.SUSHI],
+    members.MARGOT,
+    null,
+    false
+  ),
+  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null, false),
+  new Evidence(
+    "Salmon4",
+    [tags.TEMPURA, tags.SUSHI],
+    members.HALEY,
+    null,
+    false
+  ),
+  new Evidence(
+    "Salmon5",
+    [tags.TEMPURA, tags.RAMEN],
+    members.MICHAEL,
+    null,
+    false
+  ),
+  new Evidence(
+    "Salmon6",
+    [tags.YAKITORI, tags.SOBA],
+    members.MATT,
+    null,
+    false
+  ),
+  new Evidence(
+    "Salmon7",
+    [tags.YAKITORI, tags.SUSHI],
+    members.MARGOT,
+    null,
+    true
+  ),
+  new Evidence("Salmon8", [tags.TEMPURA], members.CAITLIN, null, true),
+  new Evidence(
+    "Salmon9",
+    [tags.TEMPURA, tags.SUSHI],
+    members.HALEY,
+    null,
+    true
+  ),
+  new Evidence(
+    "Salmon10",
+    [tags.TEMPURA, tags.RAMEN],
+    members.MICHAEL,
+    null,
+    true
+  ),
 ];
 
 // Source list / bucket
-export const sourceColumn =  {[uuid()]: new Column("Source List", items.slice(0, 3))};
+export const sourceColumn = {
+  [uuid()]: new Column("Source List", items),
+};
 
 // Empty destination buckets
 export const columnsFromBackend = {
