@@ -28,9 +28,24 @@ const updateColumnState = (result, columns, setColumns) => {
         copyme.source,
         copyme.quoteid
       );
-      sourceItems[source.index].mapped++;
     }
-    destItems.splice(destination.index, 0, removed);
+    if (destColumn.name !== "Source List") {
+      let existingEvidence = destItems.find(
+        (item) => item.quoteid === removed.quoteid
+      );
+      // console.log(existingEvidence);
+      if (existingEvidence === undefined) {
+        destItems.splice(destination.index, 0, removed);
+        if (sourceColumn.name === "Source List") {
+          sourceItems[source.index].mapped++;
+        }
+      }
+    } else {
+      let sourceEvidence = destItems.find(
+        (item) => item.quoteid === removed.quoteid
+      );
+      sourceEvidence.mapped--;
+    }
     setColumns({
       ...columns,
       [source.droppableId]: {
