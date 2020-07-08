@@ -23,69 +23,21 @@ export const users = [];
 
 // Evidence
 const items = [
-  new Evidence(
-    "Salmon1",
-    [tags.YAKITORI, tags.SOBA],
-    members.MATT,
-    null,
-    false
-  ),
-  new Evidence(
-    "Salmon2",
-    [tags.YAKITORI, tags.SUSHI],
-    members.MARGOT,
-    null,
-    false
-  ),
-  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null, false),
-  new Evidence(
-    "Salmon4",
-    [tags.TEMPURA, tags.SUSHI],
-    members.HALEY,
-    null,
-    false
-  ),
-  new Evidence(
-    "Salmon5",
-    [tags.TEMPURA, tags.RAMEN],
-    members.MICHAEL,
-    null,
-    false
-  ),
-  new Evidence(
-    "Salmon6",
-    [tags.YAKITORI, tags.SOBA],
-    members.MATT,
-    null,
-    false
-  ),
-  new Evidence(
-    "Salmon7",
-    [tags.YAKITORI, tags.SUSHI],
-    members.MARGOT,
-    null,
-    true
-  ),
-  new Evidence("Salmon8", [tags.TEMPURA], members.CAITLIN, null, true),
-  new Evidence(
-    "Salmon9",
-    [tags.TEMPURA, tags.SUSHI],
-    members.HALEY,
-    null,
-    true
-  ),
-  new Evidence(
-    "Salmon10",
-    [tags.TEMPURA, tags.RAMEN],
-    members.MICHAEL,
-    null,
-    true
-  ),
+  new Evidence("Salmon1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
+  new Evidence("Salmon2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
+  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null),
+  new Evidence("Salmon4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
+  new Evidence("Salmon5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
+  new Evidence("Salmon6", [tags.YAKITORI, tags.SOBA], members.MATT, null),
+  new Evidence("Salmon7", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
+  new Evidence("Salmon8", [tags.TEMPURA], members.CAITLIN, null),
+  new Evidence("Salmon9", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
+  new Evidence("Salmon10", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
 ];
 
 // Source list / bucket
 export const sourceColumn = {
-  [uuid()]: new Column("Source List", items),
+  [uuid()]: new Column("Source List", items.slice(0, 6)),
 };
 
 // Empty destination buckets

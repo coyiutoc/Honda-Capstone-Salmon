@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { sourceColumn, columnsFromBackend } from 'data/dummyData.js';
-import SearchList from 'components/BoardWorkspace/SearchList/SearchList.js';
-import Column from 'components/BoardWorkspace/Column/Column.js';
-import styles from 'components/BoardWorkspace/BoardWorkspace.module.scss';
+import { sourceColumn, columnsFromBackend } from "data/dummyData.js";
+import SearchList from "components/BoardWorkspace/SearchList/SearchList.js";
+import Column from "components/BoardWorkspace/Column/Column.js";
+import styles from "components/BoardWorkspace/BoardWorkspace.module.scss";
+import { Evidence } from "data/classes";
 
 // Updates states of all columns after a drag + place has occurred
 const updateColumnState = (result, columns, setColumns) => {
@@ -15,18 +16,31 @@ const updateColumnState = (result, columns, setColumns) => {
     const destColumn = columns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
-    const [removed] = sourceItems.splice(source.index, 1);
+    let removed = null;
+    if (sourceColumn.name !== "Source List") {
+      [removed] = sourceItems.splice(source.index, 1);
+    } else {
+      const copyme = sourceItems[source.index];
+      removed = new Evidence(
+        copyme.quote,
+        copyme.tags,
+        copyme.createdBy,
+        copyme.source,
+        copyme.quoteid
+      );
+      sourceItems[source.index].mapped++;
+    }
     destItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
       [source.droppableId]: {
         ...sourceColumn,
-        items: sourceItems
+        items: sourceItems,
       },
       [destination.droppableId]: {
         ...destColumn,
-        items: destItems
-      }
+        items: destItems,
+      },
     });
   } else {
     const column = columns[source.droppableId];
@@ -37,8 +51,8 @@ const updateColumnState = (result, columns, setColumns) => {
       ...columns,
       [source.droppableId]: {
         ...column,
-        items: copiedItems
-      }
+        items: copiedItems,
+      },
     });
   }
 };
@@ -47,28 +61,34 @@ const updateColumnState = (result, columns, setColumns) => {
 const updateSourceList = (id, property) => {
   console.log(id);
   return null;
-}
+};
 
-const BoardWorkspace = (props) =>  {
-  const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
+const BoardWorkspace = (props) => {
+  const [columns, setColumns] = useState({
+    ...sourceColumn,
+    ...columnsFromBackend,
+  });
   const srcKey = Object.entries(sourceColumn)[0][0];
   const srcColState = columns[srcKey];
 
   return (
-    <DragDropContext onDragEnd={result => updateColumnState(result, columns, setColumns)}>
+    <DragDropContext
+      onDragEnd={(result) => updateColumnState(result, columns, setColumns)}
+    >
       <div className={styles.boardWorkspace}>
-
         {/* SEARCH COLUMN */}
-        <SearchList columnId = {srcKey} column = {srcColState} updateSourceList = {updateSourceList}/>
+        <SearchList
+          columnId={srcKey}
+          column={srcColState}
+          updateSourceList={updateSourceList}
+        />
 
         {/* DESTINATION BUCKETS */}
         <div className={styles.boardColumns}>
           {Object.entries(columns).map(([columnId, column], index) => {
             if (columnId !== srcKey) {
-              return (  <Column columnId={columnId}
-                          column = {column}
-                          key={columnId}
-                        />
+              return (
+                <Column columnId={columnId} column={column} key={columnId} />
               );
             }
           })}
@@ -76,6 +96,6 @@ const BoardWorkspace = (props) =>  {
       </div>
     </DragDropContext>
   );
-}
+};
 
 export default BoardWorkspace;
