@@ -1,27 +1,61 @@
 @import "styles/partials/_colors.scss";
 @import "styles/partials/_padding.scss";
+@import "styles/partials/_tag.scss";
 
 .searchList {
+  box-sizing: border-box;
   width: 20rem;
   background-color: white;
   border-right: 1px solid $grey-dark;
   border-top: 1px solid $grey-dark;
   padding: $page-vertical-padding $page-horizontal-padding;
   overflow-y: auto;
-}
 
-.searchList__title {
-  font-size: 1.2rem;
-  font-weight: bold;
+  &__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
 
 .searchBar {
-  padding-top: $page-vertical-padding;
-  padding-bottom: $page-vertical-padding;
+  margin-top: $page-vertical-padding;
+  margin-bottom: $page-vertical-padding;
   display: flex;
   width: 100%;
 
-  > input {
-    flex: 2
+  &__title {
+    font-size: 0.8rem;
   }
+
+  > input {
+    flex: 2;
+    height: 1.5rem;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  &__title {
+    font-size: 0.8rem;
+    color: grey;
+    margin: 0.2rem 0;
+  }
+}
+
+.tagContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__title {
+    font-size: 0.8rem;
+    color: grey;
+  }
+}
+
+.tag:hover {
+  cursor: pointer;
 }

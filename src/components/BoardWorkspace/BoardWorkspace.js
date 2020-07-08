@@ -44,7 +44,8 @@ const updateColumnState = (result, columns, setColumns) => {
 };
 
 // TODO: reset order of the source column depending on search query
-const updateSourceList = () => {
+const updateSourceList = (id, property) => {
+  console.log(id);
   return null;
 }
 
@@ -64,10 +65,10 @@ const BoardWorkspace = (props) =>  {
         <div className={styles.boardColumns}>
           {Object.entries(columns).map(([columnId, column], index) => {
             if (columnId !== srcKey) {
-              return ( <Column columnId={columnId}
-                              column = {column}
-                              key={columnId}
-                              />
+              return (  <Column columnId={columnId}
+                          column = {column}
+                          key={columnId}
+                        />
               );
             }
           })}

@@ -20,13 +20,23 @@ const Evidence = (props) => {
             className = {styles.evidence}
             style={{
               backgroundColor: snapshot.isDragging
-                ? "#263B4A"
-                : "#456C86",
-              color: "white",
+                ? "#a6c4e3"
+                : "#F1F3F5",
               ...provided.draggableProps.style
             }}
           >
-            {item.content}
+            {item.quote}
+            <br>
+            </br>
+            <div className={styles.tagsContainer}>
+              {item.tags.map((tag, index) => {
+                return (
+                  <div className={styles.tag} key={tag.id} style={{ background: tag.color }}>
+                    {tag.name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         );
       }}

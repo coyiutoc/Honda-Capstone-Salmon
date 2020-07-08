@@ -9,7 +9,7 @@ const TopNavigation = (props) => {
         Back
       </div>
       <div className={styles.boardTitle}>
-        Board Title Here
+        Synthesizing Salmons
       </div>
       <div className={styles.users}>
         Users

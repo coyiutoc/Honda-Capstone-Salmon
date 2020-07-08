@@ -1,9 +1,15 @@
 @import "styles/partials/_colors.scss";
+@import "styles/partials/_tag.scss";
 
 .evidence {
   user-select: "none";
   padding: 1rem;
   margin: 0 0 2px 0;
-  min-height: 4rem;;
-  color: white;
+  border-radius: 10px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

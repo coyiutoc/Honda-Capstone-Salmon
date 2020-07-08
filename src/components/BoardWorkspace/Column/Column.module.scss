@@ -1,9 +1,55 @@
 @import "styles/partials/_colors.scss";
 
-.column {
-  padding: 0.1rem;
-  width: 250px;
-  min-height: 8rem;
-  max-height: 75vh; 
+.columnContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
+  min-width: 200px;
+  padding: 0.5rem;
 }
 
+.column {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 4rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.sourceColumnContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.sourceColumn {
+  width: 100%;
+  min-height: 4rem;
+  background-color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.columnTitle {
+  padding: 0.2rem;
+  margin-bottom: 1rem;
+
+  > input {
+    font-size: 0.8rem;
+    box-sizing: border-box;
+    width: 100%;
+    border: 0;
+    padding: 0.5rem 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
