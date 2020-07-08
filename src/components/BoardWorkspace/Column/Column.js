@@ -3,11 +3,29 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Evidence from 'components/BoardWorkspace/Evidence/Evidence.js';
 import styles from 'components/BoardWorkspace/Column/Column.module.scss';
 import { sourceColumn } from 'data/dummyData.js';
+import { tags } from 'data/dummyData.js';
 
 const Column = (props) => {
 
-let {column, columnId} = props;
+let {column, columnId, searchQuery, tagFilter} = props;
 let srcId = Object.keys(sourceColumn)[0];
+
+const renderEvidence = () => {
+  let list = column.items;
+
+  if (searchQuery !== "" && searchQuery !== null) {
+    list = list.filter(evidence => evidence.quote.toLowerCase().includes(searchQuery.toLowerCase()));
+  }
+
+  if (tagFilter !== null) {
+    list = list.filter(evidence => evidence.hasTag(tags[tagFilter]));
+  }
+
+  return (list.map((item, index) => {
+    return <Evidence item={item} index={index} key={index}/> 
+  }));
+
+};
 
 return (
     <div
@@ -27,16 +45,12 @@ return (
                 {/* COLUMN TITLE */}
                 {column.items.length > 1 && columnId !== srcId &&
                   <div className={styles.columnTitle}> 
-                    <input placeholder="Name me please"></input>
+                    <input placeholder="Enter cluster name"></input>
                   </div>
                 }
 
                 {/* EVIDENCE LIST */}
-                {column.items.map((item, index) => {
-                  return (
-                    <Evidence item={item} index={index} key={index}/>
-                  );
-                })}
+                {renderEvidence()}
                 {provided.placeholder}
               </div>
             );
