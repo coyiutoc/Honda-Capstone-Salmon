@@ -33,12 +33,20 @@ const updateColumnState = (result, columns, setColumns) => {
       let existingEvidence = destItems.find(
         (item) => item.quoteid === removed.quoteid
       );
-      // console.log(existingEvidence);
       if (existingEvidence === undefined) {
         destItems.splice(destination.index, 0, removed);
         if (sourceColumn.name === "Source List") {
           sourceItems[source.index].mapped++;
         }
+      } else {
+        const srclistid = Object.entries(columns).find(
+          (col) => col[1].name === "Source List"
+        )[0];
+        const srclist = columns[srclistid].items;
+        const srcevid = srclist.findIndex(
+          (item) => item.quoteid === removed.quoteid
+        );
+        columns[srclistid].items[srcevid].mapped--;
       }
     } else {
       let sourceEvidence = destItems.find(
