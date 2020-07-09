@@ -6,12 +6,19 @@ export function Evidence(quote, tags, createdBy, source, quoteid = uuid()) {
   this.tags = tags;
   this.createdBy = createdBy;
   this.source = source;
+
   this.quoteid = quoteid;
   this.mapped = 0;
+
+  this.hasTag = function(tag){
+    return this.tags.includes(tag);
+  }
+
 }
 
 export function Column(name, items) {
   this.name = name;
+
   if (items === undefined) {
     this.items = [];
   } else {

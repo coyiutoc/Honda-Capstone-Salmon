@@ -4,7 +4,19 @@ import styles from 'components/BoardWorkspace/SearchList/SearchList.module.scss'
 import { tags } from 'data/dummyData.js';
 
 const SearchList = (props) =>  {
-  const {column, columnId, updateSourceList} = props;
+  const {column, columnId} = props;
+  const [searchQuery, setSearchQuery] = useState(null);
+  const [tagFilter, setTagFilter] = useState(null);
+
+  const handleTagClick = (id) => {
+    // Reset filter on same tag click
+    if (tagFilter === id) {
+      setTagFilter(null);
+      return;
+    }
+
+    setTagFilter(id);
+  }
 
   return (
       <div className={styles.searchList}>
@@ -16,7 +28,7 @@ const SearchList = (props) =>  {
 
         {/* SEARCH BAR */}
         <div className={styles.searchBar}>
-          <input type="text" id="searchBar" name="searchBar" placeholder="Search for evidence"/>
+          <input onChange={(e) => setSearchQuery(e.target.value)} type="text" id="searchBar" name="searchBar" placeholder="Search for evidence"/>
         </div>
 
         {/* TAGS */}
@@ -25,11 +37,13 @@ const SearchList = (props) =>  {
           <div className={styles.tagContainer}>
             {Object.entries(tags).map(([id, data], index) => {
               return (
-                <div onClick={() => updateSourceList(id, "TAG")} 
+                <div onClick={() => handleTagClick(id)} 
                      className={styles.tag} 
                      key={id} 
-                     style={{ background: data.color }}>
-                  {data.name}
+                     style={{ background: data.color, 
+                              outline: tagFilter === id ? "3px solid yellow" : "none",
+                              opacity: tagFilter === id ? 1 : 0.4}}>
+                    {data.name}
                 </div>
               )
             })}
@@ -40,6 +54,8 @@ const SearchList = (props) =>  {
         <Column className={styles.column}
                 columnId={columnId}
                 column = {column}
+                searchQuery = {searchQuery}
+                tagFilter = {tagFilter}
         />
       </div>
   );

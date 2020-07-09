@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { sourceColumn, columnsFromBackend } from "data/dummyData.js";
-import SearchList from "components/BoardWorkspace/SearchList/SearchList.js";
-import Column from "components/BoardWorkspace/Column/Column.js";
-import styles from "components/BoardWorkspace/BoardWorkspace.module.scss";
+
+import { sourceColumn, columnsFromBackend } from 'data/dummyData.js';
+import SearchList from 'components/BoardWorkspace/SearchList/SearchList.js';
+import Column from 'components/BoardWorkspace/Column/Column.js';
+import styles from 'components/BoardWorkspace/BoardWorkspace.module.scss';
+import { tags } from 'data/dummyData.js';
 import { Evidence } from "data/classes";
+
 
 // Updates states of all columns after a drag + place has occurred
 const updateColumnState = (result, columns, setColumns) => {
@@ -84,17 +87,9 @@ const updateColumnState = (result, columns, setColumns) => {
   }
 };
 
-// TODO: reset order of the source column depending on search query
-const updateSourceList = (id, property) => {
-  console.log(id);
-  return null;
-};
 
-const BoardWorkspace = (props) => {
-  const [columns, setColumns] = useState({
-    ...sourceColumn,
-    ...columnsFromBackend,
-  });
+const BoardWorkspace = (props) =>  {
+  const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
   const srcKey = Object.entries(sourceColumn)[0][0];
   const srcColState = columns[srcKey];
 
@@ -104,18 +99,20 @@ const BoardWorkspace = (props) => {
     >
       <div className={styles.boardWorkspace}>
         {/* SEARCH COLUMN */}
-        <SearchList
-          columnId={srcKey}
-          column={srcColState}
-          updateSourceList={updateSourceList}
-        />
+        <SearchList columnId = {srcKey} column = {srcColState}/>
+
 
         {/* DESTINATION BUCKETS */}
         <div className={styles.boardColumns}>
           {Object.entries(columns).map(([columnId, column], index) => {
             if (columnId !== srcKey) {
-              return (
-                <Column columnId={columnId} column={column} key={columnId} />
+
+              return (  <Column columnId={columnId}
+                                column = {column}
+                                key={columnId}
+                                searchQuery={null}
+                                tagFilter={null}
+                        />
               );
             }
           })}
