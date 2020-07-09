@@ -8,7 +8,7 @@ export const members = {
   MICHAEL: new Member("Michael", "Silvestre"),
   HALEY: new Member("Haley", "Park"),
   CAITLIN: new Member("Caitlin", "Coyiuto"),
-}
+};
 
 // Tags
 export const tags = {
@@ -16,10 +16,10 @@ export const tags = {
   SUSHI: new Tag("Sushi", "#9C36B5"),
   TEMPURA: new Tag("Tempura", "#FA5252"),
   RAMEN: new Tag("Ramen", "#748FFC"),
-  SOBA: new Tag("Soba", "#845EF7")
-}
+  SOBA: new Tag("Soba", "#845EF7"),
+};
 
-export const users = []
+export const users = [];
 
 // Evidence
 const items = [
@@ -36,7 +36,9 @@ const items = [
 ];
 
 // Source list / bucket
-export const sourceColumn =  {[uuid()]: new Column("Source List", items.slice(0, 3))};
+export const sourceColumn = {
+  [uuid()]: new Column("Source List", items.slice(0, 6)),
+};
 
 // Empty destination buckets
 export const columnsFromBackend = {

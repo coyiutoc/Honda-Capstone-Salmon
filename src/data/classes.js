@@ -1,14 +1,19 @@
 import uuid from "uuid/v4";
 
-export function Evidence(quote, tags, createdBy, source){
+export function Evidence(quote, tags, createdBy, source, quoteid = uuid()) {
   this.id = uuid();
   this.quote = quote;
   this.tags = tags;
   this.createdBy = createdBy;
   this.source = source;
+
+  this.quoteid = quoteid;
+  this.mapped = 0;
+
   this.hasTag = function(tag){
     return this.tags.includes(tag);
   }
+
 }
 
 export function Column(name, items) {
