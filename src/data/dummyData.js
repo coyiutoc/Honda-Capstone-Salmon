@@ -37,12 +37,12 @@ const items = [
 
 // Source list / bucket
 export const sourceColumn = {
-  [uuid()]: new Column("Source List", items.slice(0, 6)),
+  [uuid()]: new Column("Source List", items),
 };
 
 // Empty destination buckets
 export const columnsFromBackend = {
-  [uuid()]: new Column("Destination 1", items.slice(6, 10)),
+  [uuid()]: new Column("Destination 1"),
   [uuid()]: new Column("Destination 2"),
   [uuid()]: new Column("Destination 3"),
   [uuid()]: new Column("Destination 4"),
