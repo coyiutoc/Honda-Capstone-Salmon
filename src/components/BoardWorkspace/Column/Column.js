@@ -6,28 +6,53 @@ import { sourceColumn } from 'data/dummyData.js';
 import { tags } from 'data/dummyData.js';
 
 const Column = (props) => {
+  const [starred, toggleStar] = useState(false);
 
-let {column, columnId, searchQuery, tagFilter} = props;
-let srcId = Object.keys(sourceColumn)[0];
+  let {column, columnId, searchQuery, tagFilter, showMapped, showUnmapped, modalCallback} = props;
+  let srcId = Object.keys(sourceColumn)[0];
 
-const renderEvidence = () => {
-  let list = column.items;
+  const renderEvidence = () => {
+    let list = column.items;
 
-  if (searchQuery !== "" && searchQuery !== null) {
-    list = list.filter(evidence => evidence.quote.toLowerCase().includes(searchQuery.toLowerCase()));
+    if (searchQuery !== "" && searchQuery !== null) {
+      list = list.filter(evidence => evidence.quote.toLowerCase().includes(searchQuery.toLowerCase()));
+    }
+
+    if (tagFilter !== null) {
+      list = list.filter(evidence => evidence.hasTag(tags[tagFilter]));
+    }
+
+    if (!showMapped) {
+      list = list.filter(evidence => evidence.mapped === 0);
+    }
+
+    if (!showUnmapped) {
+      list = list.filter(evidence => evidence.mapped > 0);
+    }
+
+    return (list.map((item, index) => {
+      return <Evidence item={item} index={index} key={index} modalCallback={modalCallback}/> 
+    }));
+
+  };
+
+  const handleStarClick = () => {
+    toggleStar(!starred);
+    column.toggleStar();
   }
 
-  if (tagFilter !== null) {
-    list = list.filter(evidence => evidence.hasTag(tags[tagFilter]));
+  const renderClusterHeader = () => {
+    return (<div className={styles.columnTitle}> 
+              <input placeholder="Enter cluster name"></input>
+              <div className={styles.columnStar} 
+                    onClick={() => handleStarClick()}
+                    style={{ color: starred ? "#FF6635" : "#CED4DA"}}>
+                    &#9733;
+              </div>
+            </div>);
   }
 
-  return (list.map((item, index) => {
-    return <Evidence item={item} index={index} key={index}/> 
-  }));
-
-};
-
-return (
+  return (
     <div
       className={columnId === srcId ? styles.sourceColumnContainer : styles.columnContainer}
       key={columnId}
@@ -43,11 +68,7 @@ return (
               >
 
                 {/* COLUMN TITLE */}
-                {column.items.length > 1 && columnId !== srcId &&
-                  <div className={styles.columnTitle}> 
-                    <input placeholder="Enter cluster name"></input>
-                  </div>
-                }
+                {column.items.length > 1 && columnId !== srcId && renderClusterHeader()}
 
                 {/* EVIDENCE LIST */}
                 {renderEvidence()}

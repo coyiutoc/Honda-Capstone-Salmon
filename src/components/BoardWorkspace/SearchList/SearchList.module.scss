@@ -4,10 +4,10 @@
 
 .searchList {
   box-sizing: border-box;
-  width: 20rem;
+  width: 30%;
   background-color: white;
-  border-right: 1px solid $grey-dark;
-  border-top: 1px solid $grey-dark;
+  border-right: 1px solid $grey-4;
+  border-top: 1px solid $grey-4;
   padding: $page-vertical-padding $page-horizontal-padding;
   overflow-y: auto;
 
@@ -29,7 +29,9 @@
 
   > input {
     flex: 2;
-    height: 1.5rem;
+    border: 1px solid $grey-4;
+    padding: 0.5rem;
+    border-radius: 4px;
   }
 }
 
@@ -40,8 +42,9 @@
 
   &__title {
     font-size: 0.8rem;
-    color: grey;
+    color: $grey-7;
     margin: 0.2rem 0;
+    font-weight: bold;
   }
 }
 
@@ -52,10 +55,28 @@
 
   &__title {
     font-size: 0.8rem;
-    color: grey;
+    color: $grey-6;
   }
 }
 
 .tag:hover {
   cursor: pointer;
+}
+
+.checkboxes {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 0.8rem; 
+  align-items: center;
+
+  > label {
+    font-weight: bold;
+    color: $grey-7;
+  }
+
+  > :nth-child(2) {
+    margin-right: 1rem;
+  }
 }

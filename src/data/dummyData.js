@@ -1,5 +1,6 @@
 import uuid from "uuid/v4";
-import { Evidence, Column, Tag, Member } from "data/classes.js";
+import moment from 'moment';
+import { Evidence, Column, Tag, Member, Participant, Comment } from "data/classes.js";
 
 // Members
 export const members = {
@@ -10,6 +11,13 @@ export const members = {
   CAITLIN: new Member("Caitlin", "Coyiuto"),
 };
 
+// Participants
+export const participants = {
+  P1: new Participant("P1", "Staff Engineer", "500", "Been at company for 2 years."),
+  P2: new Participant("P2", "Project Manager", "1000", "Recently moved to this company."),
+  P3: new Participant("P3", "Senior Designer", "750", "Have been working in company for 10 years.")
+}
+
 // Tags
 export const tags = {
   YAKITORI: new Tag("Yakitori", "#FAA2C1"),
@@ -19,21 +27,27 @@ export const tags = {
   SOBA: new Tag("Soba", "#845EF7"),
 };
 
-export const users = [];
+// Comment threads
+const commentThreads = {
+  ONE: [new Comment(members.MATT, "How much lorem can we ipsum?", moment().day(-1)),
+        new Comment(members.MARGOT, "How much ipsum can we lorem?", moment().day(0)),
+        new Comment(members.MICHAEL, "Why does lorem need an ipsum?", moment().day(0))]
+}
 
 // Evidence
 const items = [
-  new Evidence("Salmon1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
-  new Evidence("Salmon2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
-  new Evidence("Salmon3", [tags.TEMPURA], members.CAITLIN, null),
-  new Evidence("Salmon4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
-  new Evidence("Salmon5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
-  new Evidence("Trout1", [tags.YAKITORI, tags.SOBA], members.MATT, null),
-  new Evidence("Trout2", [tags.YAKITORI, tags.SUSHI], members.MARGOT, null),
-  new Evidence("Trout3", [tags.TEMPURA], members.CAITLIN, null),
-  new Evidence("Trout4", [tags.TEMPURA, tags.SUSHI], members.HALEY, null),
-  new Evidence("Trout5", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, null),
+  new Evidence("Quote1 here", [tags.YAKITORI, tags.SOBA],  members.MATT,    participants.P1, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote2 here", [tags.YAKITORI, tags.SUSHI], members.MARGOT,  participants.P2, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote3 here", [tags.TEMPURA],              members.CAITLIN, participants.P3, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote4 here", [tags.TEMPURA, tags.SUSHI],  members.HALEY,   participants.P1, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote5 here", [tags.TEMPURA, tags.RAMEN],  members.MICHAEL, participants.P2, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote6 here", [tags.YAKITORI, tags.SOBA],  members.MATT,    participants.P3, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote7 here", [tags.YAKITORI, tags.SUSHI], members.MARGOT,  participants.P1, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote8 here", [tags.TEMPURA],              members.CAITLIN, participants.P2, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote9 here", [tags.TEMPURA, tags.SUSHI],  members.HALEY,   participants.P3, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote10 here",[tags.TEMPURA, tags.RAMEN],  members.MICHAEL, participants.P1, {start: "I am the beginning", end: "I am the end."}),
 ];
+
 
 // Source list / bucket
 export const sourceColumn = {
@@ -47,5 +61,3 @@ export const columnsFromBackend = {
   [uuid()]: new Column("Destination 3"),
   [uuid()]: new Column("Destination 4"),
 };
-
-items[0].hasTag(tags.YAKITORI);
