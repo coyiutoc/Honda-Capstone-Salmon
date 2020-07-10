@@ -4,7 +4,7 @@ import styles from 'components/BoardWorkspace/SearchList/SearchList.module.scss'
 import { tags } from 'data/dummyData.js';
 
 const SearchList = (props) =>  {
-  const {column, columnId} = props;
+  const {column, columnId, modalCallback} = props;
   const [searchQuery, setSearchQuery] = useState(null);
   const [tagFilter, setTagFilter] = useState(null);
 
@@ -20,7 +20,6 @@ const SearchList = (props) =>  {
 
   return (
       <div className={styles.searchList}>
-
         {/* TITLE */}
         <div className={styles.searchList__title}>
           Evidence
@@ -51,11 +50,12 @@ const SearchList = (props) =>  {
         </div>
 
         {/* EVIDENCE SOURCE LIST */}
-        <Column className={styles.column}
+        <Column 
                 columnId={columnId}
                 column = {column}
                 searchQuery = {searchQuery}
                 tagFilter = {tagFilter}
+                modalCallback={modalCallback}
         />
       </div>
   );

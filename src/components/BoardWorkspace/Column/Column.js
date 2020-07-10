@@ -7,7 +7,7 @@ import { tags } from 'data/dummyData.js';
 
 const Column = (props) => {
 
-let {column, columnId, searchQuery, tagFilter} = props;
+let {column, columnId, searchQuery, tagFilter, modalCallback} = props;
 let srcId = Object.keys(sourceColumn)[0];
 
 const renderEvidence = () => {
@@ -22,7 +22,7 @@ const renderEvidence = () => {
   }
 
   return (list.map((item, index) => {
-    return <Evidence item={item} index={index} key={index}/> 
+    return <Evidence item={item} index={index} key={index} modalCallback={modalCallback}/> 
   }));
 
 };

@@ -1,0 +1,27 @@
+@import "styles/partials/_colors.scss";
+
+.comment {
+  background-color: $grey-0;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  
+  &__info {
+    width: 10rem;
+  }
+
+  &__text {
+    flex-grow: 1;
+  }
+}
+
+.user {
+  margin-bottom: 0.5rem;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: $grey-6;
+}

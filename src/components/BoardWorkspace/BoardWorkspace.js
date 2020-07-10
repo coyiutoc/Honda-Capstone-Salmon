@@ -5,9 +5,12 @@ import { sourceColumn, columnsFromBackend } from 'data/dummyData.js';
 import SearchList from 'components/BoardWorkspace/SearchList/SearchList.js';
 import Column from 'components/BoardWorkspace/Column/Column.js';
 import styles from 'components/BoardWorkspace/BoardWorkspace.module.scss';
+<<<<<<< HEAD
 import { tags } from 'data/dummyData.js';
 import { Evidence } from "data/classes";
 
+=======
+>>>>>>> Modal pop up + styling.
 
 // Updates states of all columns after a drag + place has occurred
 const updateColumnState = (result, columns, setColumns) => {
@@ -89,6 +92,7 @@ const updateColumnState = (result, columns, setColumns) => {
 
 
 const BoardWorkspace = (props) =>  {
+  const modalCallback = props.modalCallback;
   const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
   const srcKey = Object.entries(sourceColumn)[0][0];
   const srcColState = columns[srcKey];
@@ -99,7 +103,7 @@ const BoardWorkspace = (props) =>  {
     >
       <div className={styles.boardWorkspace}>
         {/* SEARCH COLUMN */}
-        <SearchList columnId = {srcKey} column = {srcColState}/>
+        <SearchList columnId = {srcKey} column = {srcColState} modalCallback={modalCallback}/>
 
 
         {/* DESTINATION BUCKETS */}
@@ -112,6 +116,7 @@ const BoardWorkspace = (props) =>  {
                                 key={columnId}
                                 searchQuery={null}
                                 tagFilter={null}
+                                modalCallback={modalCallback}
                         />
               );
             }
