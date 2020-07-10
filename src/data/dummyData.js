@@ -30,7 +30,8 @@ export const tags = {
 // Comment threads
 const commentThreads = {
   ONE: [new Comment(members.MATT, "How much lorem can we ipsum?", moment().day(-1)),
-        new Comment(members.MARGOT, "How much ipsum can we lorem?", moment().day(0))]
+        new Comment(members.MARGOT, "How much ipsum can we lorem?", moment().day(0)),
+        new Comment(members.MICHAEL, "Why does lorem need an ipsum?", moment().day(0))]
 }
 
 // Evidence
@@ -44,7 +45,7 @@ const items = [
   new Evidence("Quote7 here", [tags.YAKITORI, tags.SUSHI], members.MARGOT,  participants.P1, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
   new Evidence("Quote8 here", [tags.TEMPURA],              members.CAITLIN, participants.P2, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
   new Evidence("Quote9 here", [tags.TEMPURA, tags.SUSHI],  members.HALEY,   participants.P3, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
-  new Evidence("Quote10 here", [tags.TEMPURA, tags.RAMEN], members.MICHAEL, participants.P1, {start: "I am the beginning", end: "I am the end."}, commentThreads.ONE),
+  new Evidence("Quote10 here",[tags.TEMPURA, tags.RAMEN],  members.MICHAEL, participants.P1, {start: "I am the beginning", end: "I am the end."}),
 ];
 
 

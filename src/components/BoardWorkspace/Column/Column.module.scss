@@ -39,16 +39,27 @@
 .columnTitle {
   padding: 0.2rem;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
 
   > input {
     font-size: 0.8rem;
     box-sizing: border-box;
-    width: 100%;
+    flex-grow: 1;
     border: 0;
     padding: 0.5rem 0.5rem;
 
     &:focus {
       outline: none;
     }
+  }
+}
+
+.columnStar {
+  color: $grey-4;
+
+  &:hover {
+    color: $salmon-1;
+    cursor: pointer;
   }
 }

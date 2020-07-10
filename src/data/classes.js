@@ -1,6 +1,6 @@
 import uuid from "uuid/v4";
 
-export function Evidence(quote, tags, createdBy, participant, context, commentThread) {
+export function Evidence(quote, tags, createdBy, participant, context, commentThread, quoteid = uuid()) {
   this.id = uuid();
   this.quote = quote;                 // string
   this.tags = tags;                   // tag <object> []
@@ -8,8 +8,7 @@ export function Evidence(quote, tags, createdBy, participant, context, commentTh
   this.participant = participant;     // participant <object>
   this.context = context;             // {start: "", end: ""}
   this.commentThread = commentThread; // comment <object> []
-
-  this.quoteid = uuid();
+  this.quoteid = quoteid;
   this.mapped = 0;
 
   this.hasTag = function(tag){
@@ -17,14 +16,14 @@ export function Evidence(quote, tags, createdBy, participant, context, commentTh
   }
 }
 
-export function Column(name, items) {
+export function Column(name, items = []) {
   this.name = name;
+  this.items = items;
+  this.starred = false;
 
-  if (items === undefined) {
-    this.items = [];
-  } else {
-    this.items = items;
-  }
+  this.toggleStar = function() {
+    this.starred = !this.starred;
+  }  
 }
 
 export function Tag(name, color) {

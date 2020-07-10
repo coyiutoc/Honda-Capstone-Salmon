@@ -7,6 +7,8 @@ const SearchList = (props) =>  {
   const {column, columnId, modalCallback} = props;
   const [searchQuery, setSearchQuery] = useState(null);
   const [tagFilter, setTagFilter] = useState(null);
+  const [showMapped, setMapped] = useState(true);
+  const [showUnmapped, setUnmapped] = useState(true);
 
   const handleTagClick = (id) => {
     // Reset filter on same tag click
@@ -16,6 +18,14 @@ const SearchList = (props) =>  {
     }
 
     setTagFilter(id);
+  }
+
+  const handleMappedClick = (e) => {
+    setMapped(e.target.checked ? true : false);
+  }
+
+  const handleUnmappedClick = (e) => {
+    setUnmapped(e.target.checked ? true : false);
   }
 
   return (
@@ -49,12 +59,21 @@ const SearchList = (props) =>  {
           </div>
         </div>
 
+        <div className={styles.checkboxes}>
+          <label htmlFor="mappedCheckbox"> Mapped</label>
+          <input type="checkbox" id="mappedCheckbox" name="mappedCheckbox" value="mapped" defaultChecked onClick={(e => handleMappedClick(e))}/>
+          <label htmlFor="unmappedCheckbox"> Unmapped</label>
+          <input type="checkbox" id="unmappedCheckbox" name="unmappedCheckbox" value="unmapped" defaultChecked onClick={(e => handleUnmappedClick(e))}/>
+        </div>
+
         {/* EVIDENCE SOURCE LIST */}
         <Column 
                 columnId={columnId}
                 column = {column}
                 searchQuery = {searchQuery}
                 tagFilter = {tagFilter}
+                showMapped = {showMapped}
+                showUnmapped = {showUnmapped}
                 modalCallback={modalCallback}
         />
       </div>

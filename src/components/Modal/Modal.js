@@ -100,7 +100,7 @@ const Modal = (props) =>  {
                   <input type="text" placeholder="Add a comment"></input>
                   <div>Post</div>
                 </div>
-                  {evidence.commentThread.map((comment, index) => {
+                  {evidence.commentThread && evidence.commentThread.map((comment, index) => {
                     return (
                       <Comment member={comment.member} text={comment.text} date={comment.date}/>
                     )
