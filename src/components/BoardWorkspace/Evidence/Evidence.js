@@ -50,7 +50,7 @@ const Evidence = (props) => {
             style={{
               opacity: item.mapped > 0 ? "40%" : "100%",
               backgroundColor: snapshot.isDragging? "#a6c4e3" : "#F1F3F5",
-              border: snapshot.isDragging? "3px solid #FF6635" : "none",
+              border: snapshot.isDragging? "3px solid #FF6635" : "3px solid white",
               ...provided.draggableProps.style
             }}
           >

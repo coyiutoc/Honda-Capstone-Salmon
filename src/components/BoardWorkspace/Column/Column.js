@@ -9,19 +9,7 @@ const Column = (props) => {
   const [starred, toggleStar] = useState(false);
   const [showCards, setShowCards] = useState(true);
 
-<<<<<<< HEAD
-  let {
-    column,
-    columnId,
-    searchQuery,
-    tagFilter,
-    showMapped,
-    showUnmapped,
-    modalCallback,
-  } = props;
-=======
   let {column, columnId, searchQuery, tagFilter, showMapped, showUnmapped, modalCallback, showMetadata} = props;
->>>>>>> Toggle on metadata and cluster.
   let srcId = Object.keys(sourceColumn)[0];
 
   const renderEvidence = () => {
