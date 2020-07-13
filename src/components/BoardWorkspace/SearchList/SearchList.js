@@ -4,7 +4,7 @@ import styles from 'components/BoardWorkspace/SearchList/SearchList.module.scss'
 import { tags } from 'data/dummyData.js';
 
 const SearchList = (props) =>  {
-  const {column, columnId, modalCallback} = props;
+  const {column, columnId, modalCallback, showMetadata} = props;
   const [searchQuery, setSearchQuery] = useState(null);
   const [tagFilter, setTagFilter] = useState(null);
   const [showMapped, setMapped] = useState(true);
@@ -75,6 +75,7 @@ const SearchList = (props) =>  {
                 showMapped = {showMapped}
                 showUnmapped = {showUnmapped}
                 modalCallback={modalCallback}
+                showMetadata={showMetadata}
         />
       </div>
   );

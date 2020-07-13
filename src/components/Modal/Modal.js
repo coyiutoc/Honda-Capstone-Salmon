@@ -102,7 +102,7 @@ const Modal = (props) =>  {
                 </div>
                   {evidence.commentThread && evidence.commentThread.map((comment, index) => {
                     return (
-                      <Comment member={comment.member} text={comment.text} date={comment.date}/>
+                      <Comment key={index} member={comment.member} text={comment.text} date={comment.date}/>
                     )
                   })}
               </div>

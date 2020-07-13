@@ -60,4 +60,6 @@ export const columnsFromBackend = {
   [uuid()]: new Column("Destination 2"),
   [uuid()]: new Column("Destination 3"),
   [uuid()]: new Column("Destination 4"),
+  [uuid()]: new Column("Destination 5"),
+  [uuid()]: new Column("Destination 6"),
 };

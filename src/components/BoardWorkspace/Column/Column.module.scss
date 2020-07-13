@@ -7,7 +7,7 @@
   align-items: center;
   width: 100%;
   overflow-y: auto;
-  min-width: 200px;
+  min-width: 300px;
   padding: 0.5rem;
 }
 
@@ -38,14 +38,14 @@
 
 .columnTitle {
   padding: 0.2rem;
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   > input {
+    flex-grow: 1;
     font-size: 0.8rem;
     box-sizing: border-box;
-    flex-grow: 1;
     border: 0;
     padding: 0.5rem 0.5rem;
 
@@ -56,10 +56,28 @@
 }
 
 .columnStar {
+  margin-left: 0.5rem;
   color: $grey-4;
-
+  user-select: none;
   &:hover {
     color: $salmon-1;
     cursor: pointer;
+  }
+}
+
+.toggleArrow {
+  margin-left: 0.5rem;
+  user-select: none;
+  transition: .1s ease-in-out;
+  font-size: 0.8rem;
+  &:hover {
+    color: $salmon-1;
+    cursor: pointer;
+  }
+}
+
+.evidenceContainer {
+  & > * {
+    margin-top: 1rem;
   }
 }
