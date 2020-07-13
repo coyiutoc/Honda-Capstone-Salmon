@@ -1,17 +1,34 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { sourceColumn, columnsFromBackend } from 'data/dummyData.js';
-import SearchList from 'components/BoardWorkspace/SearchList/SearchList.js';
-import Column from 'components/BoardWorkspace/Column/Column.js';
-import styles from 'components/BoardWorkspace/BoardWorkspace.module.scss';
-import { Evidence } from "data/classes";
+import { Column as DataColumn } from "data/classes";
 
+import { sourceColumn, columnsFromBackend } from "data/dummyData.js";
+import SearchList from "components/BoardWorkspace/SearchList/SearchList.js";
+import Column from "components/BoardWorkspace/Column/Column.js";
+import styles from "components/BoardWorkspace/BoardWorkspace.module.scss";
+import { Evidence } from "data/classes";
+import { uuid } from "uuidv4";
 
 // Updates states of all columns after a drag + place has occurred
 const updateColumnState = (result, columns, setColumns) => {
-
-  if (!result.destination) return;
+  if (!result.destination) {
+    console.log("make new cluster");
+    console.log(columns);
+    const destIndex = Object.entries(columns).length;
+    console.log(destIndex);
+    const newCol = new DataColumn("Destination " + destIndex);
+    console.log(newCol);
+    const newId = uuid();
+    columns[newId] = newCol;
+    console.log(columns);
+    result.destination = {};
+    result.destination.droppableId = newId;
+    result.destination.index = 0;
+    console.log(result);
+    // return;
+  }
+  console.log(result);
   const { source, destination } = result;
   if (source.droppableId !== destination.droppableId) {
     const sourceColumn = columns[source.droppableId];
@@ -52,7 +69,6 @@ const updateColumnState = (result, columns, setColumns) => {
             (item) => item.quoteid === removed.quoteid
           );
           columns[srclistid].items[srcevid].mapped--;
-          console.log("the other one");
         }
       }
     } else {
@@ -60,7 +76,6 @@ const updateColumnState = (result, columns, setColumns) => {
         (item) => item.quoteid === removed.quoteid
       );
       sourceEvidence.mapped--;
-      console.log("this one");
     }
     setColumns({
       ...columns,
@@ -88,10 +103,12 @@ const updateColumnState = (result, columns, setColumns) => {
   }
 };
 
-
-const BoardWorkspace = (props) =>  {
+const BoardWorkspace = (props) => {
   const modalCallback = props.modalCallback;
-  const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
+  const [columns, setColumns] = useState({
+    ...sourceColumn,
+    ...columnsFromBackend,
+  });
   const srcKey = Object.entries(sourceColumn)[0][0];
   const srcColState = columns[srcKey];
 
@@ -101,23 +118,27 @@ const BoardWorkspace = (props) =>  {
     >
       <div className={styles.boardWorkspace}>
         {/* SEARCH COLUMN */}
-        <SearchList columnId = {srcKey} column = {srcColState} modalCallback={modalCallback}/>
-
+        <SearchList
+          columnId={srcKey}
+          column={srcColState}
+          modalCallback={modalCallback}
+        />
 
         {/* DESTINATION BUCKETS */}
         <div className={styles.boardColumns}>
           {Object.entries(columns).map(([columnId, column], index) => {
             if (columnId !== srcKey) {
-
-              return (  <Column columnId={columnId}
-                                column = {column}
-                                key={columnId}
-                                searchQuery={null}
-                                tagFilter={null}
-                                showMapped={true}
-                                showUnmapped={true}
-                                modalCallback={modalCallback}
-                        />
+              return (
+                <Column
+                  columnId={columnId}
+                  column={column}
+                  key={columnId}
+                  searchQuery={null}
+                  tagFilter={null}
+                  showMapped={true}
+                  showUnmapped={true}
+                  modalCallback={modalCallback}
+                />
               );
             }
           })}
