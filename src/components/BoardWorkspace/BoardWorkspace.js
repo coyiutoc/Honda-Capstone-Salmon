@@ -1,32 +1,22 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { Column as DataColumn } from "data/classes";
-
 import { sourceColumn, columnsFromBackend } from "data/dummyData.js";
 import SearchList from "components/BoardWorkspace/SearchList/SearchList.js";
 import Column from "components/BoardWorkspace/Column/Column.js";
 import styles from "components/BoardWorkspace/BoardWorkspace.module.scss";
 import { Evidence } from "data/classes";
+import { Column as DataColumn } from "data/classes";
 import { uuid } from "uuidv4";
 
 // Updates states of all columns after a drag + place has occurred
 const updateColumnState = (result, columns, setColumns) => {
   if (!result.destination) {
-    console.log("make new cluster");
-    console.log(columns);
+    // make new column if not dropped on an existing column
     const destIndex = Object.entries(columns).length;
-    console.log(destIndex);
-    const newCol = new DataColumn("Destination " + destIndex);
-    console.log(newCol);
     const newId = uuid();
-    columns[newId] = newCol;
-    console.log(columns);
-    result.destination = {};
-    result.destination.droppableId = newId;
-    result.destination.index = 0;
-    console.log(result);
-    // return;
+    columns[newId] = new DataColumn("Destination " + destIndex);
+    result.destination = { droppableId: newId, index: 0 };
   }
   console.log(result);
   const { source, destination } = result;
@@ -77,6 +67,8 @@ const updateColumnState = (result, columns, setColumns) => {
       );
       sourceEvidence.mapped--;
     }
+    // TODO: check for empty columns and remove them
+
     setColumns({
       ...columns,
       [source.droppableId]: {
