@@ -66,19 +66,11 @@ const updateColumnState = (result, columns, setColumns) => {
       );
       sourceEvidence.mapped--;
     }
-    // TODO: check for empty columns and remove them
-    console.log(columns);
     const colentries = Object.entries(columns);
     let deletesource = false;
     for (const [colid, colcontent] of colentries) {
       if (colcontent.name === sourceColumn.name) {
-        console.log(colid);
-        console.log(colcontent.items.length);
         if (colcontent.items.length <= 1) {
-          console.log("before");
-          console.log(columns);
-          console.log(colid);
-          console.log(columns[colid]);
           delete columns[colid];
           setColumns({
             ...columns,
@@ -87,9 +79,6 @@ const updateColumnState = (result, columns, setColumns) => {
               items: destItems,
             },
           });
-          // sourceColumn = null;
-          console.log("after");
-          console.log(columns);
         } else {
           setColumns({
             ...columns,
