@@ -2,17 +2,17 @@
 @import "styles/partials/_padding.scss";
 
 .boardWorkspace {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   height: 90vh;
+  background-color: $offwhite;
 }
 
 .boardColumns {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   max-height: 100%;
   overflow-y: auto;
-  background-color: $grey-1;
-  width: 100%;
-  //overflow-x: hidden; //Disable later when have more columns
+  overflow-x: auto;
+  background-color: $offwhite;
 }
