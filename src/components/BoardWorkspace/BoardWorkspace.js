@@ -154,6 +154,11 @@ const BoardWorkspace = (props) =>  {
             }
             return null;
           })}
+          <div className={styles.emptyBucket}>
+            Drag an evidence here
+            <br/>
+            <div className={styles.emptyBucket__icon}>&#8853;</div>
+          </div>
         </div>
       </div>
     </DragDropContext>
