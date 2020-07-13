@@ -4,7 +4,7 @@
 
 .searchList {
   box-sizing: border-box;
-  width: 30%;
+  min-width: 25rem;
   background-color: white;
   border-right: 1px solid $grey-4;
   border-top: 1px solid $grey-4;
@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
   align-items: center;
 
   > label {

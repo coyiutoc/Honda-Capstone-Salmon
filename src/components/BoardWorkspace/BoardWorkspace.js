@@ -18,7 +18,6 @@ const updateColumnState = (result, columns, setColumns) => {
     columns[newId] = new DataColumn("Destination " + destIndex);
     result.destination = { droppableId: newId, index: 0 };
   }
-  console.log(result);
   const { source, destination } = result;
   if (source.droppableId !== destination.droppableId) {
     const sourceColumn = columns[source.droppableId];
@@ -133,6 +132,7 @@ const BoardWorkspace = (props) => {
                 />
               );
             }
+            return null;
           })}
         </div>
       </div>
