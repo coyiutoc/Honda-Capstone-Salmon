@@ -15,7 +15,7 @@ const updateColumnState = (result, columns, setColumns) => {
     // make new column if not dropped on an existing column
     const destIndex = Object.entries(columns).length;
     const newId = uuid();
-    columns[newId] = new DataColumn("Destination " + destIndex);
+    columns[newId] = new DataColumn(newId);
     result.destination = { droppableId: newId, index: 0 };
   }
   const { source, destination } = result;
@@ -67,18 +67,44 @@ const updateColumnState = (result, columns, setColumns) => {
       sourceEvidence.mapped--;
     }
     // TODO: check for empty columns and remove them
-
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems,
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems,
-      },
-    });
+    console.log(columns);
+    const colentries = Object.entries(columns);
+    let deletesource = false;
+    for (const [colid, colcontent] of colentries) {
+      if (colcontent.name === sourceColumn.name) {
+        console.log(colid);
+        console.log(colcontent.items.length);
+        if (colcontent.items.length <= 1) {
+          console.log("before");
+          console.log(columns);
+          console.log(colid);
+          console.log(columns[colid]);
+          delete columns[colid];
+          setColumns({
+            ...columns,
+            [destination.droppableId]: {
+              ...destColumn,
+              items: destItems,
+            },
+          });
+          // sourceColumn = null;
+          console.log("after");
+          console.log(columns);
+        } else {
+          setColumns({
+            ...columns,
+            [source.droppableId]: {
+              ...sourceColumn,
+              items: sourceItems,
+            },
+            [destination.droppableId]: {
+              ...destColumn,
+              items: destItems,
+            },
+          });
+        }
+      }
+    }
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
