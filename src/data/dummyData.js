@@ -7,6 +7,7 @@ import {
   Member,
   Participant,
   Comment,
+  sumTags
 } from "data/classes.js";
 
 // Members
@@ -53,16 +54,8 @@ export const tags = {
 const commentThreads = {
   ONE: [
     new Comment(members.MATT, "How much lorem can we ipsum?", moment().day(-1)),
-    new Comment(
-      members.MARGOT,
-      "How much ipsum can we lorem?",
-      moment().day(0)
-    ),
-    new Comment(
-      members.MICHAEL,
-      "Why does lorem need an ipsum?",
-      moment().day(0)
-    ),
+    new Comment(members.MARGOT, "How much ipsum can we lorem?", moment().day(0)),
+    new Comment(members.MICHAEL, "Why does lorem need an ipsum?",moment().day(0)),
   ],
 };
 
@@ -149,6 +142,9 @@ const items = [
   ),
 ];
 
+// Aggregate # of occurrences for each tag
+sumTags(items);
+
 // Source list / bucket
 export const sourceColumn = {
   [uuid()]: new Column("Source List", items),
@@ -156,9 +152,3 @@ export const sourceColumn = {
 
 // Empty destination buckets
 export const columnsFromBackend = {};
-// export const columnsFromBackend = {
-//   [uuid()]: new Column("Destination 1"),
-//   [uuid()]: new Column("Destination 2"),
-//   [uuid()]: new Column("Destination 3"),
-//   [uuid()]: new Column("Destination 4"),
-// };

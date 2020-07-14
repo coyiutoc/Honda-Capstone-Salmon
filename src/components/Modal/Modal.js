@@ -78,7 +78,7 @@ const Modal = (props) =>  {
                 <div className={styles.participant__column}>
                   <div>Occupation</div>
                   <div>Company Size</div>
-                  <div>Note</div>
+                  <div>Description</div>
                 </div>
                 <div className={styles.participant__column}>
                   <div>{evidence.participant.occupation}</div>

@@ -12,6 +12,15 @@ const Column = (props) => {
   let {column, columnId, searchQuery, tagFilter, showMapped, showUnmapped, modalCallback, showMetadata} = props;
   let srcId = Object.keys(sourceColumn)[0];
 
+  const numUnique = (items) => {
+    let set = new Set();
+    for (let item of items) {
+      if (set.has(item.participant)) {continue;}
+      set.add(item.participant);
+    }
+    return set.size;
+  }
+
   const renderEvidence = () => {
     let list = column.items;
 
@@ -90,10 +99,16 @@ const Column = (props) => {
             >
               
               {/* COLUMN TITLE */}
-              {column.items.length > 1 && columnId !== srcId &&renderClusterHeader()}
+              {column.items.length > 1 && columnId !== srcId && renderClusterHeader()}
+
+              {/* NUM UNIQUE PARTICIPANTS */}
+              {column.items.length > 1 && showCards && columnId !== srcId && 
+                <div className={styles.numUniqueText}>{numUnique(column.items) + " unique participants"}</div>
+              }
 
               {/* EVIDENCE LIST */}
               {showCards && renderEvidence()}
+
               {provided.placeholder}
 
             </div>
