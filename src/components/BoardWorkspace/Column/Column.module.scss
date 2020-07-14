@@ -1,4 +1,5 @@
 @import "styles/partials/_colors.scss";
+@import "styles/partials/_typography.scss";
 
 .columnContainer {
   box-sizing: border-box;
@@ -51,6 +52,15 @@
     &:focus {
       outline: none;
     }
+  }
+
+  > textarea {
+    flex-grow: 1;
+    outline: none;
+    border: 0;
+    font-family: Telegraf;
+    resize: none;
+    overflow-y: hidden;
   }
 }
 

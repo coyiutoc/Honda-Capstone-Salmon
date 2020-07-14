@@ -72,10 +72,25 @@ const Column = (props) => {
     column.toggleStar();
   };
 
+  // Helper to adjust textarea height;
+  const handleKeyDown = (e) => {
+    
+    column.text = e.target.value;
+    // Reset field height
+    e.target.style.height = '1rem';
+
+    const height = e.target.scrollHeight;
+    
+    e.target.style.height = `${height}px`;
+}
+
   // Renders the column header HTML
   const renderClusterHeader = () => {
     return (<div className={styles.columnTitle}> 
-              <input ref={headerRef} placeholder="Enter cluster name" onChange={(e) => column.text=e.target.value}></input>
+              <textarea ref={headerRef} 
+                        placeholder="Enter cluster name" 
+                        onChange={(e) => handleKeyDown(e)}
+                        ></textarea>
               <div className={styles.columnStar} 
                     onClick={() => handleStarClick()}
                     style={{ color: starred ? "#FF6635" : "#CED4DA"}}>

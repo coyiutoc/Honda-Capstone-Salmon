@@ -6,9 +6,9 @@ import {
   Tag,
   Member,
   Participant,
-  Comment,
-  sumTags
+  Comment
 } from "data/classes.js";
+import { sumTags, duplicateEvidence } from "data/helpers.js"
 
 // Members
 export const members = {
@@ -152,5 +152,5 @@ export const sourceColumn = {
 
 // Empty destination buckets
 export const columnsFromBackend = {
-  // [uuid()]: new Column("Destination 1", items.slice(5, 10)),
+  [uuid()]: new Column("Destination 1", [duplicateEvidence(items[0]), duplicateEvidence(items[1])], "People choose roadtrips because of the lack of options"),
 };

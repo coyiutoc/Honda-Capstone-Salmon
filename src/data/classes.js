@@ -16,14 +16,6 @@ export function Evidence(quote, tags, createdBy, participant, context, commentTh
   }
 }
 
-export const sumTags = (items) => {
-  for (let item of items) {
-    for (let tag of item.tags) {
-      tag.numEvidence++;
-    }
-  }
-}
-
 export function Column(name, items = [], text = undefined) {
   this.name = name;
   this.items = items;
