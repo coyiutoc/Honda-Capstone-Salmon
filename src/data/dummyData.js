@@ -151,4 +151,6 @@ export const sourceColumn = {
 };
 
 // Empty destination buckets
-export const columnsFromBackend = {};
+export const columnsFromBackend = {
+  // [uuid()]: new Column("Destination 1", items.slice(5, 10)),
+};

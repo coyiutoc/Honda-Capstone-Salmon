@@ -175,6 +175,7 @@ const BoardWorkspace = (props) => {
                   showUnmapped={true}
                   modalCallback={modalCallback}
                   showMetadata={showMetadata}
+                  setNumShownEvidence={null}
                 />
               );
             }

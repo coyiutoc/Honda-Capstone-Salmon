@@ -24,9 +24,10 @@ export const sumTags = (items) => {
   }
 }
 
-export function Column(name, items = []) {
+export function Column(name, items = [], text = undefined) {
   this.name = name;
   this.items = items;
+  this.text = text;
   this.starred = false;
 
   this.toggleStar = function() {

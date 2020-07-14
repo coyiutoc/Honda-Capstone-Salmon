@@ -9,6 +9,7 @@ const SearchList = (props) =>  {
   const [tagFilter, setTagFilter] = useState(null);
   const [showMapped, setMapped] = useState(true);
   const [showUnmapped, setUnmapped] = useState(true);
+  const [numShownEvidence, setNumShownEvidence] = useState(column.items.length);
 
   var sortedTags = Object.keys(tags).map((key) => [key, tags[key]])
                                     .sort((a,b) => b[1].numEvidence - a[1].numEvidence);
@@ -62,12 +63,16 @@ const SearchList = (props) =>  {
           </div>
         </div>
 
+        {/* CHECKBOXES */}
         <div className={styles.checkboxes}>
           <label htmlFor="mappedCheckbox"> Mapped</label>
           <input type="checkbox" id="mappedCheckbox" name="mappedCheckbox" value="mapped" defaultChecked onClick={(e => handleMappedClick(e))}/>
           <label htmlFor="unmappedCheckbox"> Unmapped</label>
           <input type="checkbox" id="unmappedCheckbox" name="unmappedCheckbox" value="unmapped" defaultChecked onClick={(e => handleUnmappedClick(e))}/>
         </div>
+
+        {/* NUMBER OF RESULTS TEXT */}
+        <div className={styles.numResultsText}>{numShownEvidence} results</div>
 
         {/* EVIDENCE SOURCE LIST */}
         <Column 
@@ -79,6 +84,7 @@ const SearchList = (props) =>  {
                 showUnmapped = {showUnmapped}
                 modalCallback={modalCallback}
                 showMetadata={showMetadata}
+                setNumShownEvidence={setNumShownEvidence}
         />
       </div>
   );
