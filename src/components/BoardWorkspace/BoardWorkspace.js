@@ -15,20 +15,34 @@ const updateColumnState = (result, columns, setColumns) => {
     // make new column if not dropped on an existing column
     const destIndex = Object.entries(columns).length;
     const newId = uuid();
+
     columns[newId] = new DataColumn(newId);
     result.destination = { droppableId: newId, index: 0 };
   }
   const { source, destination } = result;
+  // source index is unreliable in some cases
+  // so we initialize with it here, and correct when needed
+  let evidIndex = source.index;
+
   if (source.droppableId !== destination.droppableId) {
     const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     let removed = null;
+
     if (sourceColumn.name !== "Source List") {
       [removed] = sourceItems.splice(source.index, 1);
     } else {
-      const copyme = sourceItems[source.index];
+      const evidID = result.draggableId;
+
+      for (const item of sourceItems) {
+        if (item.id === evidID) {
+          evidIndex = sourceItems.indexOf(item);
+        }
+      }
+
+      const copyme = sourceItems[evidIndex];
       removed = new Evidence(
         copyme.quote,
         copyme.tags,
@@ -46,7 +60,7 @@ const updateColumnState = (result, columns, setColumns) => {
       if (existingEvidence === undefined) {
         destItems.splice(destination.index, 0, removed);
         if (sourceColumn.name === "Source List") {
-          sourceItems[source.index].mapped++;
+          sourceItems[evidIndex].mapped++;
         }
       } else {
         if (sourceColumn.name !== "Source List") {
@@ -109,16 +123,19 @@ const updateColumnState = (result, columns, setColumns) => {
   }
 };
 
-const BoardWorkspace = (props) =>  {
+const BoardWorkspace = (props) => {
   const modalCallback = props.modalCallback;
   const [showMetadata, setShowMetadata] = useState(true);
-  const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
+  const [columns, setColumns] = useState({
+    ...sourceColumn,
+    ...columnsFromBackend,
+  });
   const srcKey = Object.entries(sourceColumn)[0][0];
   const srcColState = columns[srcKey];
 
   const handleShowMetadataClick = (e) => {
     setShowMetadata(!e.target.checked);
-  }
+  };
 
   return (
     <DragDropContext
@@ -126,37 +143,46 @@ const BoardWorkspace = (props) =>  {
     >
       <div className={styles.boardWorkspace}>
         {/* SEARCH COLUMN */}
-        <SearchList columnId = {srcKey} column = {srcColState} modalCallback={modalCallback} showMetadata={showMetadata}/>
-
+        <SearchList
+          columnId={srcKey}
+          column={srcColState}
+          modalCallback={modalCallback}
+          showMetadata={showMetadata}
+        />
 
         {/* DESTINATION BUCKETS */}
         <div className={styles.boardColumns}>
           <div className={styles.switchContainer}>
-            <div className={styles.switchLabel}>
-              Hide Metadata
-            </div>
-            <input type="checkbox" id="toggle" className={styles.checkbox} onChange={(e) => handleShowMetadataClick(e)}/>  
+            <div className={styles.switchLabel}>Hide Metadata</div>
+            <input
+              type="checkbox"
+              id="toggle"
+              className={styles.checkbox}
+              onChange={(e) => handleShowMetadataClick(e)}
+            />
             <label htmlFor="toggle" className={styles.switch}></label>
           </div>
           {Object.entries(columns).map(([columnId, column], index) => {
             if (columnId !== srcKey) {
-              return (  <Column columnId={columnId}
-                                column = {column}
-                                key={columnId}
-                                searchQuery={null}
-                                tagFilter={null}
-                                showMapped={true}
-                                showUnmapped={true}
-                                modalCallback={modalCallback}
-                                showMetadata={showMetadata}
-                        />
+              return (
+                <Column
+                  columnId={columnId}
+                  column={column}
+                  key={columnId}
+                  searchQuery={null}
+                  tagFilter={null}
+                  showMapped={true}
+                  showUnmapped={true}
+                  modalCallback={modalCallback}
+                  showMetadata={showMetadata}
+                />
               );
             }
             return null;
           })}
           <div className={styles.emptyBucket}>
             Drag an evidence here
-            <br/>
+            <br />
             <div className={styles.emptyBucket__icon}>&#8853;</div>
           </div>
         </div>
