@@ -7,16 +7,9 @@ import { tags } from "data/dummyData.js";
 
 const Column = (props) => {
   const [starred, toggleStar] = useState(false);
+  const [showCards, setShowCards] = useState(true);
 
-  let {
-    column,
-    columnId,
-    searchQuery,
-    tagFilter,
-    showMapped,
-    showUnmapped,
-    modalCallback,
-  } = props;
+  let {column, columnId, searchQuery, tagFilter, showMapped, showUnmapped, modalCallback, showMetadata} = props;
   let srcId = Object.keys(sourceColumn)[0];
 
   const renderEvidence = () => {
@@ -40,16 +33,12 @@ const Column = (props) => {
       list = list.filter((evidence) => evidence.mapped > 0);
     }
 
-    return list.map((item, index) => {
-      return (
-        <Evidence
-          item={item}
-          index={index}
-          key={index}
-          modalCallback={modalCallback}
-        />
-      );
-    });
+    return (list.map((item, index) => {
+      return <div className={styles.evidenceContainer} key={index}>
+                <Evidence item={item} index={index} modalCallback={modalCallback} showMetadata={showMetadata}/> 
+              </div>
+    }));
+
   };
 
   const handleStarClick = () => {
@@ -58,19 +47,20 @@ const Column = (props) => {
   };
 
   const renderClusterHeader = () => {
-    return (
-      <div className={styles.columnTitle}>
-        <input placeholder="Enter cluster name"></input>
-        <div
-          className={styles.columnStar}
-          onClick={() => handleStarClick()}
-          style={{ color: starred ? "#FF6635" : "#CED4DA" }}
-        >
-          &#9733;
-        </div>
-      </div>
-    );
-  };
+    return (<div className={styles.columnTitle}> 
+              <input placeholder="Enter cluster name"></input>
+              <div className={styles.columnStar} 
+                    onClick={() => handleStarClick()}
+                    style={{ color: starred ? "#FF6635" : "#CED4DA"}}>
+                    &#9733;
+              </div>
+              <div className={styles.toggleArrow}
+                   onClick={() => setShowCards(!showCards)}
+                   style={{transform: showCards ? "rotate(180deg)" : "rotate(0deg)"}}>
+                &#9650;
+              </div>
+            </div>);
+  }
 
   return (
     <div
@@ -98,19 +88,19 @@ const Column = (props) => {
                   : "#FFFFFF00",
               }}
             >
+              
               {/* COLUMN TITLE */}
-              {column.items.length > 1 &&
-                columnId !== srcId &&
-                renderClusterHeader()}
+              {column.items.length > 1 && columnId !== srcId &&renderClusterHeader()}
 
               {/* EVIDENCE LIST */}
-              {renderEvidence()}
+              {showCards && renderEvidence()}
               {provided.placeholder}
+
             </div>
-          );
-        }}
-      </Droppable>
-    </div>
+            );
+          }}
+        </Droppable>
+      </div>
   );
 };
 

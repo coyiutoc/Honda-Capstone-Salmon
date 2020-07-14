@@ -109,14 +109,16 @@ const updateColumnState = (result, columns, setColumns) => {
   }
 };
 
-const BoardWorkspace = (props) => {
+const BoardWorkspace = (props) =>  {
   const modalCallback = props.modalCallback;
-  const [columns, setColumns] = useState({
-    ...sourceColumn,
-    ...columnsFromBackend,
-  });
+  const [showMetadata, setShowMetadata] = useState(true);
+  const [columns, setColumns] = useState({...sourceColumn, ...columnsFromBackend});
   const srcKey = Object.entries(sourceColumn)[0][0];
   const srcColState = columns[srcKey];
+
+  const handleShowMetadataClick = (e) => {
+    setShowMetadata(!e.target.checked);
+  }
 
   return (
     <DragDropContext
@@ -124,31 +126,39 @@ const BoardWorkspace = (props) => {
     >
       <div className={styles.boardWorkspace}>
         {/* SEARCH COLUMN */}
-        <SearchList
-          columnId={srcKey}
-          column={srcColState}
-          modalCallback={modalCallback}
-        />
+        <SearchList columnId = {srcKey} column = {srcColState} modalCallback={modalCallback} showMetadata={showMetadata}/>
+
 
         {/* DESTINATION BUCKETS */}
         <div className={styles.boardColumns}>
+          <div className={styles.switchContainer}>
+            <div className={styles.switchLabel}>
+              Hide Metadata
+            </div>
+            <input type="checkbox" id="toggle" className={styles.checkbox} onChange={(e) => handleShowMetadataClick(e)}/>  
+            <label htmlFor="toggle" className={styles.switch}></label>
+          </div>
           {Object.entries(columns).map(([columnId, column], index) => {
             if (columnId !== srcKey) {
-              return (
-                <Column
-                  columnId={columnId}
-                  column={column}
-                  key={columnId}
-                  searchQuery={null}
-                  tagFilter={null}
-                  showMapped={true}
-                  showUnmapped={true}
-                  modalCallback={modalCallback}
-                />
+              return (  <Column columnId={columnId}
+                                column = {column}
+                                key={columnId}
+                                searchQuery={null}
+                                tagFilter={null}
+                                showMapped={true}
+                                showUnmapped={true}
+                                modalCallback={modalCallback}
+                                showMetadata={showMetadata}
+                        />
               );
             }
             return null;
           })}
+          <div className={styles.emptyBucket}>
+            Drag an evidence here
+            <br/>
+            <div className={styles.emptyBucket__icon}>&#8853;</div>
+          </div>
         </div>
       </div>
     </DragDropContext>
