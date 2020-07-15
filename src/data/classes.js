@@ -1,6 +1,6 @@
 import uuid from "uuid/v4";
 
-export function Evidence(quote, tags, createdBy, participant, context, commentThread, quoteid = uuid()) {
+export function Evidence(quote, tags, createdBy, participant, context, commentThread = [], quoteid = uuid()) {
   this.id = uuid();
   this.quote = quote;                 // string
   this.tags = tags;                   // tag <object> []

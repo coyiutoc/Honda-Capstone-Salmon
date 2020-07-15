@@ -74,7 +74,7 @@ const Column = (props) => {
 
   // Helper to adjust textarea height;
   const handleKeyDown = (e) => {
-    
+
     column.text = e.target.value;
     // Reset field height
     e.target.style.height = '1rem';

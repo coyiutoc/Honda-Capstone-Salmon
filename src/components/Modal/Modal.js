@@ -55,11 +55,11 @@ const Modal = (props) =>  {
               <div className={styles.context}>
                 <AudioPlayer />
                 <span className={styles.context__text}>
-                  {evidence.context.start + " "}
+                  {evidence.context.start && <div>{evidence.context.start + " "}</div>}
                   <div className={styles.context__highlight}>
                     {evidence.quote + " "}
                   </div>
-                  {evidence.context.end}
+                  {evidence.context.end && <div>{evidence.context.end}</div>}
                 </span>
               </div>
             </div>

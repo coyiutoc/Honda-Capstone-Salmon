@@ -13,7 +13,7 @@ const TopNavigation = (props) => {
         Boards
       </div>
       <div className={styles.boardTitle}>
-        Board Name
+        Road Trips Synthesis Board
       </div>
       <div className={styles.users}>
         {Object.entries(members).map(([id, member], index) => {
