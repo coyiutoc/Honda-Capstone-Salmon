@@ -48,7 +48,7 @@ export const tags = {
   T7: new Tag("long distance", "#9C36B5"),
   T8: new Tag("car troubles", "#FA5252"),
   T9: new Tag("quarantine", "#748FFC"),
-  T10: new Tag("nostalgia", "#845EF7"),
+  T10: new Tag("groovin'", "#845EF7"),
   T11: new Tag("driving danger", "#FAA2C1"),
   T12: new Tag("nostalgia", "#9C36B5"),
 };
