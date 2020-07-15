@@ -1,5 +1,6 @@
 @import "styles/partials/_colors.scss";
 @import "styles/partials/_tag.scss";
+@import "styles/partials/_userIcon.scss";
 
 .evidence {
   user-select: "none";
@@ -14,6 +15,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 0.5rem;
   }
 
   &__title {
@@ -23,16 +25,7 @@
   }
 
   &__icon {
-    font-weight: bolder;
-    color: white;
-    background-color: $grey-6;
-    height: 1.8rem;
-    width: 1.8rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
+    @extend .userIcon;
     align-self: flex-end;
   }
 

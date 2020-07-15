@@ -9,6 +9,10 @@ const SearchList = (props) =>  {
   const [tagFilter, setTagFilter] = useState(null);
   const [showMapped, setMapped] = useState(true);
   const [showUnmapped, setUnmapped] = useState(true);
+  const [numShownEvidence, setNumShownEvidence] = useState(column.items.length);
+
+  var sortedTags = Object.keys(tags).map((key) => [key, tags[key]])
+                                    .sort((a,b) => b[1].numEvidence - a[1].numEvidence);
 
   const handleTagClick = (id) => {
     // Reset filter on same tag click
@@ -44,27 +48,31 @@ const SearchList = (props) =>  {
         <div className={styles.tags}>
           <div className={styles.tags__title}>Filter by</div>
           <div className={styles.tagContainer}>
-            {Object.entries(tags).map(([id, data], index) => {
+            {sortedTags.map(([id, data], index) => {
               return (
                 <div onClick={() => handleTagClick(id)} 
                      className={styles.tag} 
-                     key={id} 
+                     key={index} 
                      style={{ background: data.color, 
                               outline: tagFilter === id ? "3px solid yellow" : "none",
                               opacity: tagFilter === id ? 1 : 0.4}}>
-                    {data.name}
+                    {data.name + " (" + data.numEvidence + ")"}
                 </div>
               )
             })}
           </div>
         </div>
 
+        {/* CHECKBOXES */}
         <div className={styles.checkboxes}>
           <label htmlFor="mappedCheckbox"> Mapped</label>
           <input type="checkbox" id="mappedCheckbox" name="mappedCheckbox" value="mapped" defaultChecked onClick={(e => handleMappedClick(e))}/>
           <label htmlFor="unmappedCheckbox"> Unmapped</label>
           <input type="checkbox" id="unmappedCheckbox" name="unmappedCheckbox" value="unmapped" defaultChecked onClick={(e => handleUnmappedClick(e))}/>
         </div>
+
+        {/* NUMBER OF RESULTS TEXT */}
+        <div className={styles.numResultsText}>{numShownEvidence} results</div>
 
         {/* EVIDENCE SOURCE LIST */}
         <Column 
@@ -76,6 +84,7 @@ const SearchList = (props) =>  {
                 showUnmapped = {showUnmapped}
                 modalCallback={modalCallback}
                 showMetadata={showMetadata}
+                setNumShownEvidence={setNumShownEvidence}
         />
       </div>
   );

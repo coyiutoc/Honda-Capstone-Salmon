@@ -1,5 +1,6 @@
 @import "styles/partials/_colors.scss";
 @import "styles/partials/_padding.scss";
+@import "styles/partials/_userIcon.scss";
 
 .topNavigation {
   height: 10vh;
@@ -13,6 +14,12 @@
 .backButton {
   grid-column: 1;
   justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+
+  &__arrow {
+    margin-right: 1rem;
+  }
 }
 
 .boardTitle {
@@ -24,10 +31,26 @@
 
 .users {
   grid-column: 3;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   justify-content: flex-end;
+
+  > div {
+    margin-right: 0.2rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .backButton, .boardTitle, .users {
   display: flex;
   align-items: center;
+}
+
+.icon {
+  @extend .userIcon;
 }

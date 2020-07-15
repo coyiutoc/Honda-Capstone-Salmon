@@ -4,7 +4,7 @@
 
 .searchList {
   box-sizing: border-box;
-  min-width: 25rem;
+  width: 35rem;
   background-color: white;
   border-right: 1px solid $grey-4;
   border-top: 1px solid $grey-4;
@@ -69,7 +69,8 @@
   flex-wrap: wrap;
   font-size: 0.8rem;
   align-items: center;
-
+  margin-bottom: 1rem;
+  
   > label {
     font-weight: bold;
     color: $grey-7;
@@ -78,4 +79,11 @@
   > :nth-child(2) {
     margin-right: 1rem;
   }
+}
+
+.numResultsText {
+  font-size: 0.8rem;
+  color: $grey-6;
+  text-align: right;
+  margin-bottom: 1rem;
 }

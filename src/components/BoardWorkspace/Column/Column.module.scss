@@ -1,4 +1,5 @@
 @import "styles/partials/_colors.scss";
+@import "styles/partials/_typography.scss";
 
 .columnContainer {
   box-sizing: border-box;
@@ -7,7 +8,7 @@
   align-items: center;
   overflow-y: auto;
   min-width: 25rem;
-  margin: 0.5rem;
+  margin: 1rem;
 }
 
 .column {
@@ -52,6 +53,15 @@
       outline: none;
     }
   }
+
+  > textarea {
+    flex-grow: 1;
+    outline: none;
+    border: 0;
+    font-family: Telegraf;
+    resize: none;
+    overflow-y: hidden;
+  }
 }
 
 .columnStar {
@@ -79,4 +89,11 @@
   & > * {
     margin-top: 1rem;
   }
+}
+
+.numUniqueText {
+  text-align: right;
+  font-size: 0.7rem;
+  color: $grey-5;
+  margin-top: 0.5rem;
 }

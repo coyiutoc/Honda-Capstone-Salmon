@@ -1,6 +1,6 @@
 import uuid from "uuid/v4";
 
-export function Evidence(quote, tags, createdBy, participant, context, commentThread, quoteid = uuid()) {
+export function Evidence(quote, tags, createdBy, participant, context, commentThread = [], quoteid = uuid()) {
   this.id = uuid();
   this.quote = quote;                 // string
   this.tags = tags;                   // tag <object> []
@@ -16,9 +16,10 @@ export function Evidence(quote, tags, createdBy, participant, context, commentTh
   }
 }
 
-export function Column(name, items = []) {
+export function Column(name, items = [], text = undefined) {
   this.name = name;
   this.items = items;
+  this.text = text;
   this.starred = false;
 
   this.toggleStar = function() {
@@ -30,6 +31,7 @@ export function Tag(name, color) {
   this.name = name;
   this.color = color;
   this.id = uuid();
+  this.numEvidence = 0;
 }
 
 export function Member(firstName, lastName) {
