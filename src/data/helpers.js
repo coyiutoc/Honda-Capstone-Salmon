@@ -16,7 +16,6 @@ export const sumTags = (items) => {
 // Makes the original evidence mapped
 // and returns a duplicate evidence
 export const duplicateEvidence = (copyme) => {
-  debugger;
   copyme.mapped++;
   return new Evidence(
     copyme.quote,
@@ -54,7 +53,6 @@ export const parseEvidence = (data) => {
         let memberID = "M" + d[key];
         let textKey = "Text" + i;
         let textVal = d[textKey];
-        debugger;
         comments.push(new Comment(members[memberID], textVal, moment().day(-1)))
       }
     }

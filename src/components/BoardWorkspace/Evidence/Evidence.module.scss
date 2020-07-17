@@ -34,18 +34,6 @@
     line-height: 1.2rem;
     color: $grey-9;
   }
-
-  &__info {
-    display: flex;
-    justify-content: center;
-    color: $grey-6;
-    margin-right: 0.5rem;
-
-    &:hover {
-      color: $salmon-1;
-      cursor: pointer;
-    }
-  }
 }
 
 .tagsContainer {

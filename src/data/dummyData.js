@@ -60,7 +60,7 @@ export const sourceColumn = {
   [uuid()]: new Column("Source List", items),
 };
 
-// Empty destination buckets
+// Destination buckets
 export const columnsFromBackend = {
   [uuid()]: new Column("Destination 1", [duplicateEvidence(items[4]), duplicateEvidence(items[15]), duplicateEvidence(items[32])], "Music is an important part of road trip experience."),
   [uuid()]: new Column("Destination 2", [duplicateEvidence(items[5]), duplicateEvidence(items[27])], "Flexibility is important in road trips."),

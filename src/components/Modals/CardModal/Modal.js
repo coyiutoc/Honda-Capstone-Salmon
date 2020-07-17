@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Comment from "components/Modal/Comment/Comment.js";
+import Comment from "components/Modals/CardModal/Comment/Comment.js";
 import AudioPlayer from "assets/audioPlayer.js";
-import styles from 'components/Modal/Modal.module.scss';
+import styles from 'components/Modals/CardModal/Modal.module.scss';
 
 const Modal = (props) =>  {
   const {setShowModal, evidence} = props;
