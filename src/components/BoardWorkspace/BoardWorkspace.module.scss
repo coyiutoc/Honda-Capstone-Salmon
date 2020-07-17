@@ -31,7 +31,7 @@
   color: $grey-4;
   transition: all .2s ease-in;
   margin-left: 1rem;
-  font-weight: bold;
+  font-weight: 500;
 
   &:hover {
     color: $grey-8;
@@ -53,9 +53,9 @@
 }
 
 .switchLabel {
-  font-size: 0.8rem;
+  font-size: 0.96rem;
   margin-right: 1rem;
-  margin-top: 0.2rem;
+  margin-top: -0.26rem;
 }
 
 .switch {

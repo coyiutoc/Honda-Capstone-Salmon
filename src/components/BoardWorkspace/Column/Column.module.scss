@@ -44,7 +44,7 @@
 
   > input {
     flex-grow: 1;
-    font-size: 0.8rem;
+    font-size: 0.96rem;
     box-sizing: border-box;
     border: 0;
     padding: 0.5rem 0.5rem;
@@ -58,9 +58,11 @@
     flex-grow: 1;
     outline: none;
     border: 0;
-    font-family: Telegraf;
+    font-family: Effra;
     resize: none;
     overflow-y: hidden;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
   }
 }
 
@@ -93,7 +95,7 @@
 
 .numUniqueText {
   text-align: right;
-  font-size: 0.7rem;
+  font-size: 0.96rem;
   color: $grey-5;
   margin-top: 0.5rem;
 }

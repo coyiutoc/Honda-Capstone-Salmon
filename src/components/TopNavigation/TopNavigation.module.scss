@@ -3,12 +3,14 @@
 @import "styles/partials/_userIcon.scss";
 
 .topNavigation {
-  height: 10vh;
+  height: 7.2vh;
   background-color: white;
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
   padding-left: $page-horizontal-padding;
   padding-right: $page-horizontal-padding;
+  color: $grey-9;
+  border-bottom: 1px solid $grey-3;
 }
 
 .backButton {
@@ -26,7 +28,7 @@
   grid-column: 2;
   font-size: 1.2rem;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .users {
