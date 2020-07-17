@@ -20,7 +20,7 @@
 
   &__title {
     color: $grey-6;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     flex-grow: 1;
   }
 
@@ -30,7 +30,9 @@
   }
 
   &__quote {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.2rem;
+    color: $grey-9;
   }
 
   &__info {
@@ -50,4 +52,5 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 0.4rem;
 }

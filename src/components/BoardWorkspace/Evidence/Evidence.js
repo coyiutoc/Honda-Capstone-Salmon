@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import styles from "components/BoardWorkspace/Evidence/Evidence.module.scss";
 
 const Evidence = (props) => {
-  let {item, index, modalCallback, showMetadata} = props;
+  let { item, index, modalCallback, showMetadata } = props;
 
   const renderMetadataCard = () => {
     return (
@@ -14,7 +14,7 @@ const Evidence = (props) => {
           <div className={styles.evidence__icon}><div>{item.createdBy.initials}</div></div>
         </div>
         <div className={styles.evidence__quote}>{item.quote}</div>
-        <br/>
+        {/* <br/> */}
 
         {/* TAGS */}
         <div className={styles.tagsContainer}>
@@ -49,8 +49,8 @@ const Evidence = (props) => {
             className={styles.evidence}
             style={{
               opacity: item.mapped > 0 ? "40%" : "100%",
-              backgroundColor: snapshot.isDragging? "#a6c4e3" : "#F1F3F5",
-              border: snapshot.isDragging? "3px solid #FF6635" : "3px solid white",
+              backgroundColor: snapshot.isDragging ? "#a6c4e3" : "#F1F3F5",
+              border: snapshot.isDragging ? "3px solid #FF6635" : "3px solid white",
               ...provided.draggableProps.style
             }}
           >
