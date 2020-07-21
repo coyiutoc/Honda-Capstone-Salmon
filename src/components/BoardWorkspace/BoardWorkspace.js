@@ -124,7 +124,7 @@ const updateColumnState = (result, columns, setColumns) => {
 };
 
 const BoardWorkspace = (props) => {
-  const modalCallback = props.modalCallback;
+  const {modalCallback, clusterModalCallback} = props;
   const [showMetadata, setShowMetadata] = useState(true);
   const [columns, setColumns] = useState({
     ...sourceColumn,
@@ -147,6 +147,7 @@ const BoardWorkspace = (props) => {
           columnId={srcKey}
           column={srcColState}
           modalCallback={modalCallback}
+          clusterModalCallback={null}
           showMetadata={showMetadata}
         />
 
@@ -174,6 +175,7 @@ const BoardWorkspace = (props) => {
                   showMapped={true}
                   showUnmapped={true}
                   modalCallback={modalCallback}
+                  clusterModalCallback={clusterModalCallback}
                   showMetadata={showMetadata}
                   setNumShownEvidence={null}
                 />

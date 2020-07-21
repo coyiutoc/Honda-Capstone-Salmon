@@ -16,7 +16,6 @@ export const sumTags = (items) => {
 // Makes the original evidence mapped
 // and returns a duplicate evidence
 export const duplicateEvidence = (copyme) => {
-  debugger;
   copyme.mapped++;
   return new Evidence(
     copyme.quote,
@@ -27,6 +26,48 @@ export const duplicateEvidence = (copyme) => {
     copyme.commentThread,
     copyme.quoteid
   );
+}
+
+export const getColumnDemographics = (column) => {
+  let result = {};
+  let uniqueParticipants = getUniqueParticipants(column.items);
+  result["gender"] = aggregate(uniqueParticipants, "gender");
+  result["age"] = aggregate(uniqueParticipants, "age");
+  result["occupation"] = aggregate(uniqueParticipants, "occupation");
+  result["companySize"] = aggregate(uniqueParticipants, "companySize");
+
+  return result;
+}
+
+const getUniqueParticipants = (items) => {
+  let set = new Set();
+  for (let item of items) {
+    if (set.has(item.participant)) {continue;}
+    set.add(item.participant);
+  }
+  return Array.from(set);
+}
+
+const aggregate = (participants, key) => {
+  let map = {};
+  let total = participants.length;
+
+  for (let p of participants) {
+    let value = p[key];
+    if (!(value in map)) {
+      map[value] = 1;
+    } else {
+      map[value]++;
+    }
+  }
+
+  if (key !== "occupation") {
+    for (let k of Object.keys(map)) {
+      map[k] = Math.round((map[k] / total) * 100);
+    }
+  }
+
+  return map;
 }
 
 export const parseEvidence = (data) => {
@@ -54,7 +95,6 @@ export const parseEvidence = (data) => {
         let memberID = "M" + d[key];
         let textKey = "Text" + i;
         let textVal = d[textKey];
-        debugger;
         comments.push(new Comment(members[memberID], textVal, moment().day(-1)))
       }
     }
