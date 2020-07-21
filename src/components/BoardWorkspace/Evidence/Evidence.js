@@ -3,12 +3,8 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import styles from "components/BoardWorkspace/Evidence/Evidence.module.scss";
 
 const Evidence = (props) => {
-<<<<<<< HEAD
-  let { item, index, modalCallback, showMetadata } = props;
-=======
   let {item, index, modalCallback, showMetadata} = props;
   const [isHovered, setHovered] = useState(false);
->>>>>>> Cluster modal logic.
 
   const renderMetadataCard = () => {
     return (

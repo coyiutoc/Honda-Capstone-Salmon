@@ -15,11 +15,11 @@
 .modal {
   z-index: 3; 
   width: 800px;
-  max-height: 500px;
+  max-height: 600px;
   background-color: white;
   border-radius: 10px;
   overflow-y: auto; 
-  padding: 0.5rem 1rem 1rem 1rem;
+  padding: 1rem 2rem;
   font-size: 0.8rem;
 }
 
@@ -30,10 +30,9 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid $grey-4;
 
-  &__arrow {
-    margin-right: 0.5rem;
+  &__title {
+    font-size: 1.2rem;
   }
 
   &__buffer {
@@ -56,39 +55,59 @@
     text-decoration: underline;
     color: $grey-6;
     margin-right: 0.5rem;
+    font-size: 0.8rem;
   }
 }
 
-.content {
-  margin-top: 1.5rem;
-  padding: 0 calc(20px + 0.5rem);
+.uniqueParticipants {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  color: $grey-6;
+  margin-bottom: 1rem;
+
+  &__label {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
 }
 
 .row {
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
+  width: 100%;
+
+  > .block:first-child {
+    margin-right: 0.5rem;
+  }
+
+  > .block:last-child {
+    margin-left: 0.5rem;
+  }
 
   &__label {
     width: 6rem;
     color: $grey-6;
+    font-size: 0.9rem;
   }
 }
 
-.tags {
+.pieRow {
   display: flex;
   flex-direction: row;
 
-  &__list {
-    display: flex;
-    flex-direction: row;
+  > svg {
+    margin-right: 2rem;
   }
 }
 
-.tag {
-  margin-top: 0;
+.block {
+  width: 50%;
+
+  &__title {
+    font-size: 1rem;
+  }
 }
 
 .context {
@@ -97,7 +116,7 @@
   flex-direction: column;
   width: 100px;
   font-size: 1rem;
-  line-height: 1.2rem;
+  line-height: 1.35rem;
 
   > :first-child{
     margin-bottom: 1rem;
@@ -108,8 +127,8 @@
   }
 
   &__highlight {
-    color: black;
-    font-weight: bold;
+    color: $grey-9;
+    font-weight: 500;
     display: inline;
   }
 }
@@ -122,16 +141,12 @@
   &__column {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    font-size: 0.8rem;
+    width: 26%;
+    font-size: 0.94rem;
     color: $grey-6;
     
-    > div {
-      margin-bottom: 0.5rem;
-    }
-    
     &:first-child {
-      color: black;
+      color: $grey-9;
       font-size: 1rem;
     }
   }
@@ -139,6 +154,7 @@
 
 .comments {
   width: 90%;
+  font-size: 1rem;
 
   &__input {
     display: flex;
@@ -151,6 +167,9 @@
       border: 1px solid $grey-4;
       padding: 0.5rem;
       border-radius: 4px;
+      padding-left: 0.8rem;
+      font-size: 0.92rem;
+      color: $grey-9;
     }
 
     > div {
@@ -158,7 +177,7 @@
       display: flex;
       justify-content: center;
       color: $sea-1;
-      font-weight: bolder;
+      font-weight: 700;
     }
   }
 }
@@ -166,4 +185,19 @@
 .divider {
   border-bottom: 1px solid $grey-4;
   margin-bottom: 1rem;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+
+  &__label {
+    font-weight: 700;
+    width: 10rem;
+  }
+
+  &__labelSmall {
+    font-weight: 700;
+    width: 6rem;
+  }
 }
