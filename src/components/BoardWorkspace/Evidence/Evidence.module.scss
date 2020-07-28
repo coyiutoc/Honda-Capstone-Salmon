@@ -24,6 +24,22 @@
     flex-grow: 1;
   }
 
+  &__commentsContainer {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5rem;
+
+    > svg { 
+      margin-top: 0.5rem;
+      margin-right: 0.2rem;
+    }
+
+    > * {
+      color: $grey-6;
+    }
+  }
+
   &__icon {
     @extend .userIcon;
     align-self: flex-end;
@@ -41,4 +57,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 0.4rem;
+}
+
+mark {
+  background-color: $salmon-3;
 }
