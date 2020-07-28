@@ -1,10 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Comment from "components/Modals/CardModal/Comment/Comment.js";
 import styles from 'components/Modals/ClusterModal/ClusterModal.module.scss';
 import { getColumnDemographics } from "data/helpers.js"
+import * as d3 from "d3";
 
 const ClusterModal = (props) =>  {
   const {setShowClusterModal, column} = props;
+
+  useEffect(() => {
+    createPie(columnDemographics.gender, "genderPie");
+    createPie(columnDemographics.age, "agePie");
+  });
+
+  // Helper fxn to create the pie charts
+  const createPie = (data, id) => {
+    let width = 110;
+    let height = 110;
+    let margin = 10;
+
+    let radius = Math.min(width, height) / 2 - margin;
+
+    let svg = d3.select("#" + id)
+                  .attr("width", width)
+                  .attr("height", height)
+                .append("g")
+                  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    // set the color scale
+    let color = d3.scaleOrdinal()
+                  .domain(data)
+                  .range(["#29509D", "#FFD4C8", "#C8D2E6", "#FF6635", "#E9EDF5"])
+
+    // Compute the position of each group on the pie:
+    let pie = d3.pie()
+                .value(function(d) {return d.value; })
+    let data_ready = pie(d3.entries(data))
+
+    let arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius)
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+    svg.selectAll('whatever')
+        .data(data_ready)
+        .enter()
+        .append('path')
+        .attr('fill', function(d){ return(color(d.data.key)) })
+        .transition().delay(function(d,i) {
+          return i * 500; }).duration(500)
+                            .attrTween('d', function(d) {
+                              var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+                              return function(t) {
+                                d.endAngle = i(t); 
+                                return arc(d)
+                              }
+                            })
+        .style("opacity", 0.7)
+  }
 
   // Helper fxn to count number of unique participants
   const numUnique = (items) => {
@@ -46,14 +98,7 @@ const ClusterModal = (props) =>  {
               <div className={styles.block__title}>Gender</div>
               <div className={styles.divider}></div>
               <div className={styles.pieRow}>
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M100 50C100 38.3648 95.9422 27.0939 88.5257 18.1288C81.1091 9.16373 70.7982 3.06586 59.3691 0.885638C47.94 -1.29458 36.1083 0.579367 25.9123 6.18466C15.7163 11.79 7.79438 20.7756 3.51118 31.5938L50 50H100Z" fill="#29509D"/>
-                  <path d="M100 50C100 60.559 96.6572 70.8469 90.4509 79.3893C84.2444 87.9316 75.493 94.2899 65.4509 97.5528L50 50H100Z" fill="#FFA386"/>
-                  <path d="M65.4509 97.5528C57.9465 99.9911 49.9717 100.619 42.1783 99.3844C34.3849 98.1501 26.9943 95.0888 20.6107 90.4509L50 50L65.4509 97.5528Z" fill="#FFD4C8"/>
-                  <path d="M20.6107 90.4509C10.3222 82.9758 3.26863 71.8612 0.885637 59.3691L50 50L20.6107 90.4509Z" fill="#FFF1ED"/>
-                  <path d="M0.918641 59.5405C-0.0824924 54.3901 -0.266729 49.1142 0.372693 43.9065L50 50L0.918641 59.5405Z" fill="#C8D2E6"/>
-                  <path d="M0.373699 43.8983C0.898375 39.631 1.97127 35.4492 3.56582 31.4564L50 50L0.373699 43.8983Z" fill="#E9EDF5"/>
-                </svg>
+                <svg id = "genderPie"/>
                 <div>
                   {Object.keys(columnDemographics["gender"]).map((key, index) => {
                     return (
@@ -70,14 +115,7 @@ const ClusterModal = (props) =>  {
             <div className={styles.block__title}>Age</div>
               <div className={styles.divider}></div>   
               <div className={styles.pieRow}>
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M100 50C100 38.3648 95.9422 27.0939 88.5257 18.1288C81.1091 9.16373 70.7982 3.06586 59.3691 0.885638C47.94 -1.29458 36.1083 0.579367 25.9123 6.18466C15.7163 11.79 7.79438 20.7756 3.51118 31.5938L50 50H100Z" fill="#29509D"/>
-                  <path d="M100 50C100 60.559 96.6572 70.8469 90.4509 79.3893C84.2444 87.9316 75.493 94.2899 65.4509 97.5528L50 50H100Z" fill="#FFA386"/>
-                  <path d="M65.4509 97.5528C57.9465 99.9911 49.9717 100.619 42.1783 99.3844C34.3849 98.1501 26.9943 95.0888 20.6107 90.4509L50 50L65.4509 97.5528Z" fill="#FFD4C8"/>
-                  <path d="M20.6107 90.4509C10.3222 82.9758 3.26863 71.8612 0.885637 59.3691L50 50L20.6107 90.4509Z" fill="#FFF1ED"/>
-                  <path d="M0.918641 59.5405C-0.0824924 54.3901 -0.266729 49.1142 0.372693 43.9065L50 50L0.918641 59.5405Z" fill="#C8D2E6"/>
-                  <path d="M0.373699 43.8983C0.898375 39.631 1.97127 35.4492 3.56582 31.4564L50 50L0.373699 43.8983Z" fill="#E9EDF5"/>
-                </svg>
+                <svg id="agePie"/>
                 <div>
                   {Object.keys(columnDemographics["age"]).map((key, index) => {
                     return (

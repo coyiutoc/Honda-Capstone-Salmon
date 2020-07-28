@@ -9,7 +9,7 @@ const Column = (props) => {
   const [starred, toggleStar] = useState(false);
   const [showCards, setShowCards] = useState(true);
   const [isHovered, setHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState({down: {x: null, y: null}, up: {x: null, y: null}})
+  const [mousePosition, setMousePosition] = useState({down: {x: null, y: null}, up: {x: null, y: null}});
   const headerRef = React.createRef();
 
   let {column, columnId, searchQuery, tagFilter, showMapped, showUnmapped, modalCallback, clusterModalCallback, showMetadata, setNumShownEvidence} = props;
@@ -62,7 +62,7 @@ const Column = (props) => {
 
     return (list.map((item, index) => {
       return <div className={styles.evidenceContainer} key={index}>
-                <Evidence item={item} index={index} modalCallback={modalCallback} showMetadata={showMetadata}/> 
+                <Evidence item={item} index={index} modalCallback={modalCallback} showMetadata={showMetadata} searchQuery={searchQuery}/> 
               </div>
     }));
 
@@ -76,6 +76,14 @@ const Column = (props) => {
                         onChange={(e) => handleKeyDown(e)}
                         onClick={(e) => e.stopPropagation()}
                         ></textarea>
+              {column.comments.length > 0 && 
+                <div className={styles.commentsContainer}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M1 0H15C15.5523 0 16 0.447715 16 1V11C16 11.5523 15.5523 12 15 12H9.4141L5.707 15.707C5.42101 15.9929 4.99096 16.0784 4.61735 15.9237C4.24373 15.7689 4.00009 15.4044 4 15V12H1C0.447715 12 0 11.5523 0 11V1C0 0.447715 0.447715 0 1 0ZM9 10H14V2H2V10H5C5.55228 10 6 10.4477 6 11V12.5859L8.293 10.293C8.48045 10.1054 8.73479 9.99998 9 10Z" fill="#868E96"/>
+                  </svg>
+                  <div>{column.comments.length}</div>
+                </div>
+              }
               <div className={styles.columnStar} 
                     onClick={(e) => handleStarClick(e)}
                     style={{ color: starred ? "#FF6635" : "#CED4DA"}}>

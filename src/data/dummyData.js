@@ -33,7 +33,7 @@ export const participants = {
     "Office Administrator",
     "500",
     "Cleveline OH area -- used to work for GM",
-    AGE_RANGES["20_30"],
+    AGE_RANGES["40_50"],
     "Male",
   ),
   P3: new Participant(
@@ -70,12 +70,16 @@ export const sourceColumn = {
 };
 
 // TODO: customize later for individual columns
-const columnThread = [new Comment(members.M1, "Lorem Ipsum", moment().day(-1)), new Comment(members.M2, "Lorem Ipsum", moment().day(-1)), new Comment(members.M3, "Lorem Ipsum", moment().day(-1))];
+const columnThread = {
+  CT1: [new Comment(members.M1, "Pretty well distributed.", moment().day(-1)), new Comment(members.M2, "Let's see when Kevin is done running P4 if they fit here too.", moment().day(-1))],
+  CT2: [new Comment(members.M3, "Rethink this cluster? Doesn't have good distribution.", moment().day(-3))],
+  CT3: [new Comment(members.M2, "I think there's another quote from P2 that fits better here.", moment().day(-1)), new Comment(members.M1, "Yeah I'll try to find it", moment().day(-1))],
+};
 
 // Destination buckets
 export const columnsFromBackend = {
-  [uuid()]: new Column("Destination 1", [duplicateEvidence(items[4]), duplicateEvidence(items[15]), duplicateEvidence(items[32])], "Music is an important part of road trip experience.", columnThread),
-  [uuid()]: new Column("Destination 2", [duplicateEvidence(items[5]), duplicateEvidence(items[27])], "Flexibility is important in road trips.", columnThread),
-  [uuid()]: new Column("Destination 3", [duplicateEvidence(items[34]), duplicateEvidence(items[36])], "People choose road trips because of the lack of other options.", columnThread),
-  [uuid()]: new Column("Destination 4", [duplicateEvidence(items[17]), duplicateEvidence(items[28])], "People mostly eat snacks on road trips.", columnThread),
+  [uuid()]: new Column("Destination 1", [duplicateEvidence(items[4]), duplicateEvidence(items[15]), duplicateEvidence(items[32])], "Music is an important part of road trip experience.", columnThread.CT1),
+  [uuid()]: new Column("Destination 2", [duplicateEvidence(items[5]), duplicateEvidence(items[27])], "Flexibility is important in road trips.", columnThread.CT2),
+  [uuid()]: new Column("Destination 3", [duplicateEvidence(items[34]), duplicateEvidence(items[36])], "People choose road trips because of the lack of other options.", columnThread.CT3),
+  [uuid()]: new Column("Destination 4", [duplicateEvidence(items[17]), duplicateEvidence(items[28])], "People mostly eat snacks on road trips.", columnThread.CT2),
 };
