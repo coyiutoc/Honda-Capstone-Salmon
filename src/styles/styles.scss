@@ -1,7 +1,8 @@
 @import "./partials/_typography.scss";
+@import "./partials/_colors.scss";
 
 body, html {
-  font-family: Telegraf;
+  font-family: Effra;
   margin: 0;
   box-sizing: border-box;
   height: 100%;
@@ -10,7 +11,36 @@ body, html {
   }
 
   input {
-    font-family: Telegraf;
+    font-family: Effra;
+  }
+
+  // Firefox
+  
+  scrollbar-width: thin;              /* "auto" or "thin"  */
+  scrollbar-color: $grey-4 $grey-2;   /* scroll thumb & track */ 
+
+  // Chrome/Edge
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $grey-2; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $grey-4; 
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $grey-4;  
   }
 }
 

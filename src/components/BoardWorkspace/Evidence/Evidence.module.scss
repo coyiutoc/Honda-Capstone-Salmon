@@ -1,10 +1,10 @@
 @import "styles/partials/_colors.scss";
 @import "styles/partials/_tag.scss";
+@import "styles/partials/_userIcon.scss";
 
 .evidence {
   user-select: "none";
   padding: 1rem;
-  margin: 0 0 1rem 0;
   border-radius: 10px;
 
   > div {
@@ -15,42 +15,40 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 0.5rem;
   }
 
   &__title {
     color: $grey-6;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     flex-grow: 1;
   }
 
-  &__icon {
-    font-weight: bolder;
-    color: white;
-    background-color: $grey-6;
-    height: 1.8rem;
-    width: 1.8rem;
-    border-radius: 50%;
+  &__commentsContainer {
+    align-self: flex-end;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
+    flex-direction: row;
+    margin-right: 0.5rem;
+
+    > svg { 
+      margin-top: 0.5rem;
+      margin-right: 0.2rem;
+    }
+
+    > * {
+      color: $grey-6;
+    }
+  }
+
+  &__icon {
+    @extend .userIcon;
     align-self: flex-end;
   }
 
   &__quote {
-    font-size: 1rem;
-  }
-
-  &__info {
-    display: flex;
-    justify-content: center;
-    color: $grey-6;
-    margin-right: 0.5rem;
-
-    &:hover {
-      color: $salmon-1;
-      cursor: pointer;
-    }
+    font-size: 0.95rem;
+    line-height: 1.2rem;
+    color: $grey-9;
   }
 }
 
@@ -58,4 +56,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+
+mark {
+  background-color: $salmon-3;
 }

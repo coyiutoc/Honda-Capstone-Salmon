@@ -1,33 +1,58 @@
 @import "styles/partials/_colors.scss";
 @import "styles/partials/_padding.scss";
+@import "styles/partials/_userIcon.scss";
 
 .topNavigation {
-  height: 10vh;
+  height: 8vh;
   background-color: white;
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
   padding-left: $page-horizontal-padding;
   padding-right: $page-horizontal-padding;
+  color: $grey-9;
+  border-bottom: 1px solid $grey-3;
 }
 
 .backButton {
   grid-column: 1;
   justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+
+  &__arrow {
+    margin-right: 1rem;
+  }
 }
 
 .boardTitle {
   grid-column: 2;
   font-size: 1.2rem;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .users {
   grid-column: 3;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   justify-content: flex-end;
+
+  > div {
+    margin-right: 0.2rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .backButton, .boardTitle, .users {
   display: flex;
   align-items: center;
+}
+
+.icon {
+  @extend .userIcon;
 }

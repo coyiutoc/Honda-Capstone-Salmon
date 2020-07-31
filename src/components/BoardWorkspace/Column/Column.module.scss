@@ -1,4 +1,5 @@
 @import "styles/partials/_colors.scss";
+@import "styles/partials/_typography.scss";
 
 .columnContainer {
   box-sizing: border-box;
@@ -7,7 +8,7 @@
   align-items: center;
   overflow-y: auto;
   min-width: 25rem;
-  padding: 0.5rem;
+  margin: 1rem;
 }
 
 .column {
@@ -37,14 +38,14 @@
 
 .columnTitle {
   padding: 0.2rem;
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   > input {
-    font-size: 0.8rem;
-    box-sizing: border-box;
     flex-grow: 1;
+    font-size: 0.96rem;
+    box-sizing: border-box;
     border: 0;
     padding: 0.5rem 0.5rem;
 
@@ -52,13 +53,69 @@
       outline: none;
     }
   }
+
+  > textarea {
+    flex-grow: 1;
+    outline: none;
+    border: 0;
+    font-family: Effra;
+    resize: none;
+    overflow-y: hidden;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+
+    &:hover, &:focus {
+      outline: 2px solid $salmon-3;
+    }
+  }
 }
 
 .columnStar {
+  margin-left: 0.5rem;
+  margin-right: 0.1rem;
   color: $grey-4;
-
+  user-select: none;
   &:hover {
     color: $salmon-1;
     cursor: pointer;
   }
+}
+
+.toggleArrow {
+  margin-left: 0.5rem;
+  user-select: none;
+  transition: .1s ease-in-out;
+  font-size: 0.8rem;
+  &:hover {
+    color: $salmon-1;
+    cursor: pointer;
+  }
+}
+
+.evidenceContainer {
+  & > * {
+    margin-top: 1rem;
+  }
+}
+
+.commentsContainer {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5rem;
+
+  > svg { 
+    margin-top: 0.5rem;
+  }
+
+  > * {
+    color: $grey-6;
+    margin-left: 0.2rem;
+  }
+}
+
+.numUniqueText {
+  text-align: right;
+  font-size: 0.9rem;
+  color: $grey-6;
+  margin-top: 0.5rem;
 }

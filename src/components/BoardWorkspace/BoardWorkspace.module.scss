@@ -4,15 +4,91 @@
 .boardWorkspace {
   display: flex;
   flex-direction: row;
-  height: 90vh;
-  background-color: $offwhite;
+  height: 92vh;
+  background-color: $grey-1;
 }
 
 .boardColumns {
   display: flex;
   flex-direction: row;
   max-height: 100%;
-  overflow-y: auto;
-  overflow-x: auto;
-  background-color: $offwhite;
+  overflow: auto;
+  width: 100%;
+
+  > :not(:first-child) {
+    margin-top: 3rem;
+  }
+}
+
+.emptyBucket {
+  min-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  border-radius: 10px;
+  color: $grey-4;
+  transition: all .2s ease-in;
+  margin-left: 1rem;
+  font-weight: 500;
+
+  &:hover {
+    color: $grey-8;
+    background-color: white;
+  }
+
+  &__icon {
+    font-size: 2rem;
+  }
+}
+
+.switchContainer {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 0;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+
+.switchLabel {
+  font-size: 0.96rem;
+  margin-right: 1rem;
+  margin-top: -0.26rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  transition: all 0.3s;
+  &:hover {
+    cursor:pointer;
+  }
+}
+
+.switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius:50%;
+  background-color: white;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s;
+}
+
+.checkbox:checked + .switch::after {
+  left : 20px;
+}
+.checkbox:checked + .switch {
+  background-color: $grey-8;
+}
+.checkbox {
+  display : none;
 }

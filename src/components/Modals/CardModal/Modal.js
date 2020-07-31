@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Comment from "components/Modal/Comment/Comment.js";
+import Comment from "components/Modals/CardModal/Comment/Comment.js";
 import AudioPlayer from "assets/audioPlayer.js";
-import styles from 'components/Modal/Modal.module.scss';
+import styles from 'components/Modals/CardModal/Modal.module.scss';
 
 const Modal = (props) =>  {
   const {setShowModal, evidence} = props;
@@ -55,11 +55,11 @@ const Modal = (props) =>  {
               <div className={styles.context}>
                 <AudioPlayer />
                 <span className={styles.context__text}>
-                  {evidence.context.start + " "}
+                  {evidence.context.start && <div>{evidence.context.start + " "}</div>}
                   <div className={styles.context__highlight}>
                     {evidence.quote + " "}
                   </div>
-                  {evidence.context.end}
+                  {evidence.context.end && <div>{evidence.context.end}</div>}
                 </span>
               </div>
             </div>
@@ -78,7 +78,7 @@ const Modal = (props) =>  {
                 <div className={styles.participant__column}>
                   <div>Occupation</div>
                   <div>Company Size</div>
-                  <div>Note</div>
+                  <div>Description</div>
                 </div>
                 <div className={styles.participant__column}>
                   <div>{evidence.participant.occupation}</div>
@@ -102,7 +102,7 @@ const Modal = (props) =>  {
                 </div>
                   {evidence.commentThread && evidence.commentThread.map((comment, index) => {
                     return (
-                      <Comment member={comment.member} text={comment.text} date={comment.date}/>
+                      <Comment key={index} member={comment.member} text={comment.text} date={comment.date}/>
                     )
                   })}
               </div>

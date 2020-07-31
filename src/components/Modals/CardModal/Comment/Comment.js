@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from 'components/Modal/Comment/Comment.module.scss';
+import styles from 'components/Modals/CardModal/Comment/Comment.module.scss';
 
 const Comment = (props) =>  {
   const {member, text, date} = props;
