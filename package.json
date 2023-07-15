@@ -8,11 +8,11 @@
     "@testing-library/user-event": "^7.1.2",
     "d3": "^5.16.0",
     "moment": "^2.27.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-svg": "^11.0.29",
     "uuidv4": "^6.1.1"
   },
